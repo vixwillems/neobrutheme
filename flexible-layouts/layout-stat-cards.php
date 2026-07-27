@@ -7,7 +7,7 @@
  * @package Neobrutheme
  */
 
-$stats = get_sub_field( 'stats' ) ?: array();
+$stats = neo_sub( 'stats' ) ?: array();
 ?>
 
 <section class="bg-[var(--color-yellow)] border-b-8 border-black">

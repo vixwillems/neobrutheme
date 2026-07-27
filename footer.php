@@ -36,10 +36,12 @@
     </div>
 
     <?php
-    // Social links from ACF options (Phase 6).
+    // Social links from ACF settings page.
     if ( function_exists( 'get_field' ) ) :
-      $social_links = get_field( 'social_links', 'option' );
-      if ( $social_links ) :
+      $settings_id = neobrutheme_get_settings_page_id();
+      if ( $settings_id ) :
+        $social_links = get_field( 'social_links', $settings_id );
+        if ( $social_links ) :
     ?>
     <div class="mt-6 flex items-center justify-center flex-wrap gap-3 sm:gap-4 text-xs opacity-60">
       <?php foreach ( $social_links as $link ) : ?>
@@ -50,7 +52,8 @@
     </div>
     <?php
       endif;
-    endif;
+      endif;
+      endif;
     ?>
 
   </div>

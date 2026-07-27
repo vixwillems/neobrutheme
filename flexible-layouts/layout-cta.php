@@ -7,10 +7,10 @@
  * @package Neobrutheme
  */
 
-$heading     = get_sub_field( 'heading' ) ?: 'Get in Touch';
-$button_text = get_sub_field( 'button_text' ) ?: 'Contact Us';
-$button_url  = get_sub_field( 'button_url' ) ?: home_url( '/' );
-$color       = get_sub_field( 'color' ) ?: 'red';
+$heading     = neo_sub( 'heading' ) ?: 'Get in Touch';
+$button_text = neo_sub( 'button_text' ) ?: 'Contact Us';
+$button_url  = neo_sub( 'button_url' ) ?: home_url( '/' );
+$color       = neo_sub( 'color' ) ?: 'red';
 
 $bg_class = neobrutheme_color_class( $color );
 ?>

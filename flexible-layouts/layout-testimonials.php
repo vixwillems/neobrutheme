@@ -7,8 +7,8 @@
  * @package Neobrutheme
  */
 
-$heading      = get_sub_field( 'heading' ) ?: 'What People Say';
-$testimonials = get_sub_field( 'testimonials' ) ?: array();
+$heading      = neo_sub( 'heading' ) ?: 'What People Say';
+$testimonials = neo_sub( 'testimonials' ) ?: array();
 ?>
 
 <section class="py-16 bg-[var(--color-cyan)] border-y-8 border-black">

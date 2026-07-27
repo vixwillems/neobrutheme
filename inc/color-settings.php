@@ -21,13 +21,15 @@ function neobrutheme_color_custom_properties() {
 		return;
 	}
 
+	$settings_id = neobrutheme_get_settings_page_id();
+
 	$colors = array(
-		'bg'     => get_field( 'color_bg', 'option' ) ?: '#FFFFFF',
-		'fg'     => get_field( 'color_fg', 'option' ) ?: '#000000',
-		'red'    => get_field( 'color_red', 'option' ) ?: '#FF5C5C',
-		'yellow' => get_field( 'color_yellow', 'option' ) ?: '#FFDE59',
-		'cyan'   => get_field( 'color_cyan', 'option' ) ?: '#5CE1E6',
-		'white'  => get_field( 'color_white', 'option' ) ?: '#FFFFFF',
+		'bg'     => $settings_id ? get_field( 'color_bg', $settings_id ) ?: '#FFFFFF' : '#FFFFFF',
+		'fg'     => $settings_id ? get_field( 'color_fg', $settings_id ) ?: '#000000' : '#000000',
+		'red'    => $settings_id ? get_field( 'color_red', $settings_id ) ?: '#FF5C5C' : '#FF5C5C',
+		'yellow' => $settings_id ? get_field( 'color_yellow', $settings_id ) ?: '#FFDE59' : '#FFDE59',
+		'cyan'   => $settings_id ? get_field( 'color_cyan', $settings_id ) ?: '#5CE1E6' : '#5CE1E6',
+		'white'  => $settings_id ? get_field( 'color_white', $settings_id ) ?: '#FFFFFF' : '#FFFFFF',
 	);
 
 	echo '<style id="neobrutheme-colors">';

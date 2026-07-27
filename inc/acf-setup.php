@@ -24,45 +24,25 @@ function neobrutheme_acf_json_load_point( $paths ) {
 add_filter( 'acf/settings/load_json', 'neobrutheme_acf_json_load_point' );
 
 /**
- * Register ACF options pages.
+ * Get the Settings page ID (the page using template-settings.php).
+ * Used by color-settings.php and footer.php to read global settings.
  */
-function neobrutheme_register_options_pages() {
-	if ( ! function_exists( 'acf_add_options_page' ) ) {
-		return;
+function neobrutheme_get_settings_page_id() {
+	static $page_id = null;
+	if ( $page_id !== null ) {
+		return $page_id ?: 0;
 	}
-
-	acf_add_options_page( array(
-		'page_title' => 'Neobrutheme Settings',
-		'menu_title' => 'Neobrutheme',
-		'menu_slug'  => 'neobrutheme-settings',
-		'capability' => 'edit_posts',
-		'redirect'   => false,
-		'icon_url'   => 'dashicons-admin-customizer',
-		'position'   => 60,
+	$pages = get_posts( array(
+		'post_type'   => 'page',
+		'meta_key'    => '_wp_page_template',
+		'meta_value'  => 'template-settings.php',
+		'post_status' => 'private,publish',
+		'numberposts' => 1,
+		'fields'      => 'ids',
 	) );
-
-	acf_add_options_sub_page( array(
-		'page_title' => 'General Settings',
-		'menu_title' => 'General',
-		'menu_slug'  => 'theme-general',
-		'parent_slug' => 'neobrutheme-settings',
-	) );
-
-	acf_add_options_sub_page( array(
-		'page_title' => 'Color Settings',
-		'menu_title' => 'Colors',
-		'menu_slug'  => 'theme-colors',
-		'parent_slug' => 'neobrutheme-settings',
-	) );
-
-	acf_add_options_sub_page( array(
-		'page_title' => 'Homepage Layout',
-		'menu_title' => 'Homepage',
-		'menu_slug'  => 'theme-homepage',
-		'parent_slug' => 'neobrutheme-settings',
-	) );
+	$page_id = ! empty( $pages ) ? $pages[0] : 0;
+	return $page_id;
 }
-add_action( 'acf/init', 'neobrutheme_register_options_pages' );
 
 /**
  * Register field groups programmatically (fallback if JSON not loaded).
@@ -129,9 +109,9 @@ function neobrutheme_register_field_groups() {
 		'location' => array(
 			array(
 				array(
-					'param'    => 'options_page',
+					'param'    => 'page_template',
 					'operator' => '==',
-					'value'    => 'theme-general',
+					'value'    => 'template-settings.php',
 				),
 			),
 		),
@@ -188,9 +168,9 @@ function neobrutheme_register_field_groups() {
 		'location' => array(
 			array(
 				array(
-					'param'    => 'options_page',
+					'param'    => 'page_template',
 					'operator' => '==',
-					'value'    => 'theme-colors',
+					'value'    => 'template-settings.php',
 				),
 			),
 		),
@@ -422,9 +402,9 @@ function neobrutheme_register_field_groups() {
 		'location' => array(
 			array(
 				array(
-					'param'    => 'options_page',
+					'param'    => 'post_type',
 					'operator' => '==',
-					'value'    => 'theme-homepage',
+					'value'    => 'page',
 				),
 			),
 		),

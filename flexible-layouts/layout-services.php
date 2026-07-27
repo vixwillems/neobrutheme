@@ -7,8 +7,8 @@
  * @package Neobrutheme
  */
 
-$heading = get_sub_field( 'heading' ) ?: 'Services';
-$style   = get_sub_field( 'style' ) ?: 'grid';
+$heading = neo_sub( 'heading' ) ?: 'Services';
+$style   = neo_sub( 'style' ) ?: 'grid';
 
 $query = new WP_Query( array(
   'post_type'      => 'service',

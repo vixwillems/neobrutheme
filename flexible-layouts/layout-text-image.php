@@ -7,10 +7,10 @@
  * @package Neobrutheme
  */
 
-$heading   = get_sub_field( 'heading' );
-$content   = get_sub_field( 'content' );
-$image     = get_sub_field( 'image' );
-$alignment = get_sub_field( 'alignment' ) ?: 'right';
+$heading   = neo_sub( 'heading' );
+$content   = neo_sub( 'content' );
+$image     = neo_sub( 'image' );
+$alignment = neo_sub( 'alignment' ) ?: 'right';
 ?>
 
 <section class="py-16">

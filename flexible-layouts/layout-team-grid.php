@@ -7,8 +7,8 @@
  * @package Neobrutheme
  */
 
-$heading = get_sub_field( 'heading' ) ?: 'Our Team';
-$count   = intval( get_sub_field( 'count' ) ) ?: 6;
+$heading = neo_sub( 'heading' ) ?: 'Our Team';
+$count   = intval( neo_sub( 'count' ) ) ?: 6;
 
 $query = new WP_Query( array(
   'post_type'      => 'team',

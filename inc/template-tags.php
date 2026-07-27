@@ -121,3 +121,22 @@ function neobrutheme_text_color_class( $color ) {
 	);
 	return isset( $map[ $color ] ) ? $map[ $color ] : 'text-[var(--color-fg)]';
 }
+
+/**
+ * Get a sub-field value from the current ACF row.
+ *
+ * Works around ACF's get_sub_field() failing when field groups are
+ * registered programmatically via acf_add_local_field_group().
+ * Reads directly from the row data returned by get_row().
+ *
+ * @param string $name The sub-field name.
+ * @param mixed  $default Default value if not found.
+ * @return mixed
+ */
+function neo_sub( $name, $default = '' ) {
+	$row = get_row();
+	if ( $row && isset( $row[ $name ] ) ) {
+		return $row[ $name ];
+	}
+	return $default;
+}

@@ -11,18 +11,8 @@ get_header();
 <?php while ( have_posts() ) : the_post(); ?>
 
   <?php
-  // Check for ACF Flexible Content layouts.
-  if ( function_exists( 'have_rows' ) && have_rows( 'page_layouts', 'option' ) ) :
-    while ( have_rows( 'page_layouts', 'option' ) ) :
-      the_row();
-      $layout = get_row_layout();
-      $file   = NEOBRUTEME_DIR . '/flexible-layouts/layout-' . $layout . '.php';
-      if ( file_exists( $file ) ) {
-        include $file;
-      }
-    endwhile;
-  elseif ( function_exists( 'have_rows' ) && have_rows( 'page_layouts' ) ) :
-    // Per-page flexible content (if not using options page).
+  // Check for ACF Flexible Content layouts on this page.
+  if ( function_exists( 'have_rows' ) && have_rows( 'page_layouts' ) ) :
     while ( have_rows( 'page_layouts' ) ) :
       the_row();
       $layout = get_row_layout();

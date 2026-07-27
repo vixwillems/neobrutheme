@@ -7,10 +7,10 @@
  * @package Neobrutheme
  */
 
-$heading          = get_sub_field( 'heading' ) ?: 'Hello World';
-$subheading       = get_sub_field( 'subheading' );
-$bg_color         = get_sub_field( 'bg_color' ) ?: 'cyan';
-$show_composition = get_sub_field( 'show_composition' );
+$heading          = neo_sub( 'heading' ) ?: 'Hello World';
+$subheading       = neo_sub( 'subheading' );
+$bg_color         = neo_sub( 'bg_color' ) ?: 'cyan';
+$show_composition = neo_sub( 'show_composition' );
 
 $bg_class = neobrutheme_color_class( $bg_color );
 ?>

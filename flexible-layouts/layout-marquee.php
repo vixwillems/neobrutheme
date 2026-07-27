@@ -7,9 +7,9 @@
  * @package Neobrutheme
  */
 
-$text  = get_sub_field( 'text' ) ?: 'Neo-Brutalist Design';
-$speed = get_sub_field( 'speed' ) ?: 'medium';
-$color = get_sub_field( 'color' ) ?: 'yellow';
+$text  = neo_sub( 'text' ) ?: 'Neo-Brutalist Design';
+$speed = neo_sub( 'speed' ) ?: 'medium';
+$color = neo_sub( 'color' ) ?: 'yellow';
 
 $bg_class   = neobrutheme_color_class( $color );
 $speed_class = 'animate-marquee';

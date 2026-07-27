@@ -7,10 +7,10 @@
  * @package Neobrutheme
  */
 
-$heading   = get_sub_field( 'heading' ) ?: 'Latest';
-$post_type = get_sub_field( 'post_type' ) ?: 'post';
-$count     = intval( get_sub_field( 'count' ) ) ?: 6;
-$columns   = get_sub_field( 'columns' ) ?: '3';
+$heading   = neo_sub( 'heading' ) ?: 'Latest';
+$post_type = neo_sub( 'post_type' ) ?: 'post';
+$count     = intval( neo_sub( 'count' ) ) ?: 6;
+$columns   = neo_sub( 'columns' ) ?: '3';
 
 $grid_class = 'grid-cols-1 md:grid-cols-2';
 if ( $columns === '3' ) {
