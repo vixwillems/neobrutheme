@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "neobrutheme/content-grid",
+  "title": "Content Grid",
+  "category": "neobrutheme",
+  "icon": "grid-view",
+  "description": "Grid of posts from a selected post type.",
+  "attributes": {
+    "heading": { "type": "string", "default": "" },
+    "postType": { "type": "string", "default": "post" },
+    "count": { "type": "number", "default": 6 },
+    "columns": { "type": "string", "default": "3" }
+  },
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:../../assets/js/blocks.js",
+  "render": "file:./render.php"
+}

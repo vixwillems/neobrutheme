@@ -34,6 +34,9 @@ require_once NEOBRUTEME_DIR . '/inc/customizer.php';
 // Custom REST API endpoints.
 require_once NEOBRUTEME_DIR . '/inc/rest-api.php';
 
+// Register custom blocks.
+require_once NEOBRUTEME_DIR . '/inc/blocks.php';
+
 /**
  * Enqueue scripts and styles.
  */

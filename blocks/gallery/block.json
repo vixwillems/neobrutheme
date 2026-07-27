@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "neobrutheme/gallery",
+  "title": "Image Gallery",
+  "category": "neobrutheme",
+  "icon": "format-gallery",
+  "description": "Grid of images.",
+  "attributes": {
+    "heading": { "type": "string", "default": "" },
+    "images": { "type": "array", "default": [] },
+    "columns": { "type": "string", "default": "3" }
+  },
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:../../assets/js/blocks.js",
+  "render": "file:./render.php"
+}

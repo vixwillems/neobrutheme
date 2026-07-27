@@ -3,6 +3,7 @@
 <?php while ( have_posts() ) : the_post(); ?>
 
   <?php
+  // If the page has ACF Flexible Content layouts, use them (existing behavior).
   if ( function_exists( 'have_rows' ) && have_rows( 'page_layouts' ) ) :
     while ( have_rows( 'page_layouts' ) ) :
       the_row();
@@ -12,7 +13,11 @@
         include $file;
       }
     endwhile;
+  elseif ( has_blocks( get_the_content() ) ) :
+    // Use Block Editor content (visual editing).
+    the_content();
   else :
+    // Fallback to standard content.
     $page_id  = get_the_ID();
     $hero_img = get_field( 'hero_background_image' );
   ?>
@@ -35,7 +40,7 @@
     </div>
   </section>
 
-  <?php if ( has_blocks( get_the_content() ) || ! empty( trim( get_the_content() ) ) ) : ?>
+  <?php if ( ! empty( trim( get_the_content() ) ) ) : ?>
     <div class="px-6 md:px-12 py-12 md:py-16">
       <div class="max-w-4xl mx-auto rich-text">
         <?php the_content(); ?>

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "neobrutheme/divider",
+  "title": "Divider",
+  "category": "neobrutheme",
+  "icon": "minus",
+  "description": "Visual divider between sections.",
+  "attributes": {
+    "style": { "type": "string", "default": "thick" },
+    "color": { "type": "string", "default": "red" }
+  },
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:../../assets/js/blocks.js",
+  "render": "file:./render.php"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "neobrutheme/features",
+  "title": "Feature List",
+  "category": "neobrutheme",
+  "icon": "star-filled",
+  "description": "Grid of feature cards.",
+  "attributes": {
+    "heading": { "type": "string", "default": "" },
+    "features": { "type": "array", "default": [] },
+    "columns": { "type": "string", "default": "3" }
+  },
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:../../assets/js/blocks.js",
+  "render": "file:./render.php"
+}

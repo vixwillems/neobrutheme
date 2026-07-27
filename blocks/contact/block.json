@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "neobrutheme/contact",
+  "title": "Contact Form",
+  "category": "neobrutheme",
+  "icon": "email",
+  "description": "Contact form section.",
+  "attributes": {
+    "heading": { "type": "string", "default": "" },
+    "email": { "type": "string", "default": "" },
+    "bgColor": { "type": "string", "default": "yellow" }
+  },
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:../../assets/js/blocks.js",
+  "render": "file:./render.php"
+}
