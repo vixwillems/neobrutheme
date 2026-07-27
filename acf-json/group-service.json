@@ -1,0 +1,19 @@
+{
+  "key": "group_service",
+  "title": "Service Details",
+  "fields": [
+    { "key": "field_service_icon", "label": "Icon (emoji or class)", "name": "service_icon", "type": "text" },
+    { "key": "field_service_short", "label": "Short Description", "name": "short_description", "type": "textarea", "rows": 3 },
+    { "key": "field_service_price", "label": "Price Range", "name": "price_range", "type": "text" },
+    { "key": "field_service_featured", "label": "Featured", "name": "is_featured", "type": "true_false", "ui": 1 }
+  ],
+  "location": [
+    [
+      { "param": "post_type", "operator": "==", "value": "service" }
+    ]
+  ],
+  "position": "normal",
+  "style": "seamless",
+  "menu_order": 0,
+  "active": true
+}

@@ -1,45 +1,57 @@
-<?php
-/**
- * The template for displaying single posts.
- *
- * @package Neobrutheme
- */
-
-get_header();
-?>
+<?php get_header(); ?>
 
 <?php while ( have_posts() ) : the_post(); ?>
 
-<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <section class="bg-[var(--color-red)] border-b-8 border-[var(--color-fg)] px-6 py-12 md:px-12">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-3 mb-4">
+        <time class="text-xs font-black uppercase tracking-wider border-2 border-[var(--color-fg)] px-2 py-0.5 bg-[var(--color-bg)]" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
+        <?php
+          $cats = get_the_category();
+          if ( ! empty( $cats ) ) :
+            $cat = $cats[0];
+        ?>
+          <a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>" class="text-xs font-black uppercase tracking-wider border-2 border-[var(--color-fg)] px-2 py-0.5 bg-[var(--color-yellow)] hover:bg-[var(--color-bg)] transition-colors duration-100"><?php echo esc_html( $cat->name ); ?></a>
+        <?php endif; ?>
+      </div>
+      <h1 class="display-stroke text-4xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-none mb-4"><?php the_title(); ?></h1>
+      <p class="text-sm font-bold opacity-70">Written by <?php the_author(); ?></p>
+    </div>
+  </section>
 
-  <?php if ( has_post_thumbnail() ) : ?>
-  <div class="mb-8 border-8 border-black shadow-[12px_12px_0_0_var(--color-fg)] overflow-hidden">
-    <?php the_post_thumbnail( 'full', array( 'class' => 'w-full h-auto grayscale hover:grayscale-0 transition-all duration-200' ) ); ?>
-  </div>
+  <?php if ( has_blocks( get_the_content() ) || ! empty( trim( get_the_content() ) ) ) : ?>
+    <div class="px-6 md:px-12 py-12 md:py-16">
+      <div class="max-w-4xl mx-auto rich-text">
+        <?php the_content(); ?>
+      </div>
+    </div>
   <?php endif; ?>
 
-  <header class="mb-8 border-b-8 border-black pb-6">
-    <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 leading-none">
-      <?php the_title(); ?>
-    </h1>
-    <div class="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-wider text-black/50">
-      <?php neobrutheme_posted_on(); ?>
-      <span class="w-px h-4 bg-black/20"></span>
-      <?php neobrutheme_posted_by(); ?>
+  <div class="px-6 md:px-12 py-12 border-t-8 border-[var(--color-fg)]">
+    <div class="max-w-4xl mx-auto">
+      <?php
+        $prev = get_previous_post();
+        $next = get_next_post();
+      ?>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <?php if ( $prev ) : ?>
+          <a href="<?php echo esc_url( get_permalink( $prev ) ); ?>" class="card p-6 group text-left">
+            <p class="text-xs font-black uppercase tracking-wider text-[var(--color-fg)] opacity-50 mb-2">&larr; Previous</p>
+            <p class="text-lg font-black uppercase group-hover:text-[var(--color-red)] transition-colors duration-100"><?php echo esc_html( get_the_title( $prev ) ); ?></p>
+          </a>
+        <?php else : ?>
+          <div></div>
+        <?php endif; ?>
+        <?php if ( $next ) : ?>
+          <a href="<?php echo esc_url( get_permalink( $next ) ); ?>" class="card p-6 group text-right">
+            <p class="text-xs font-black uppercase tracking-wider text-[var(--color-fg)] opacity-50 mb-2">Next &rarr;</p>
+            <p class="text-lg font-black uppercase group-hover:text-[var(--color-red)] transition-colors duration-100"><?php echo esc_html( get_the_title( $next ) ); ?></p>
+          </a>
+        <?php endif; ?>
+      </div>
     </div>
-  </header>
-
-  <div class="rich-text text-lg mb-10">
-    <?php the_content(); ?>
   </div>
-
-  <footer class="border-t-4 border-black pt-6">
-    <?php neobrutheme_entry_footer(); ?>
-  </footer>
-
-</article>
 
 <?php endwhile; ?>
 
-<?php
-get_footer();
+<?php get_footer(); ?>

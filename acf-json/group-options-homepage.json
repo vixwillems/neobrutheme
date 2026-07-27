@@ -1,0 +1,415 @@
+{
+  "key": "group_options_homepage",
+  "title": "Homepage Layout",
+  "fields": [
+    {
+      "key": "field_page_layouts",
+      "label": "Page Layouts",
+      "name": "page_layouts",
+      "type": "flexible_content",
+      "button_label": "Add Layout",
+      "layouts": [
+        {
+          "key": "layout_hero",
+          "name": "hero",
+          "title": "Hero",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_hero_heading", "label": "Heading", "name": "heading", "type": "text" },
+            { "key": "field_hero_subheading", "label": "Subheading", "name": "subheading", "type": "textarea", "rows": 2 },
+            {
+              "key": "field_hero_bg_color",
+              "label": "Background Color",
+              "name": "bg_color",
+              "type": "select",
+              "choices": { "red": "Red", "yellow": "Yellow", "cyan": "Cyan", "white": "White" },
+              "default_value": "cyan"
+            },
+            {
+              "key": "field_hero_show_composition",
+              "label": "Show Composition Panel",
+              "name": "show_composition",
+              "type": "true_false",
+              "default_value": 1,
+              "ui": 1
+            }
+          ]
+        },
+        {
+          "key": "layout_marquee",
+          "name": "marquee",
+          "title": "Marquee",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_marquee_text", "label": "Text", "name": "text", "type": "text" },
+            {
+              "key": "field_marquee_speed",
+              "label": "Speed",
+              "name": "speed",
+              "type": "select",
+              "choices": { "slow": "Slow", "medium": "Medium", "fast": "Fast" },
+              "default_value": "medium"
+            },
+            {
+              "key": "field_marquee_color",
+              "label": "Color",
+              "name": "color",
+              "type": "select",
+              "choices": { "red": "Red", "cyan": "Cyan", "yellow": "Yellow" },
+              "default_value": "yellow"
+            }
+          ]
+        },
+        {
+          "key": "layout_stat_cards",
+          "name": "stat_cards",
+          "title": "Stat Cards",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_stats",
+              "label": "Stats",
+              "name": "stats",
+              "type": "repeater",
+              "layout": "table",
+              "button_label": "Add Stat",
+              "sub_fields": [
+                { "key": "field_stat_number", "label": "Number", "name": "number", "type": "number" },
+                { "key": "field_stat_label", "label": "Label", "name": "label", "type": "text" },
+                {
+                  "key": "field_stat_color",
+                  "label": "Color",
+                  "name": "color",
+                  "type": "select",
+                  "choices": { "red": "Red", "yellow": "Yellow", "cyan": "Cyan" },
+                  "default_value": "yellow"
+                },
+                {
+                  "key": "field_stat_shape",
+                  "label": "Shape",
+                  "name": "shape",
+                  "type": "select",
+                  "choices": { "default": "Square", "circle": "Circle", "diamond": "Diamond" },
+                  "default_value": "default"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "layout_content_grid",
+          "name": "content_grid",
+          "title": "Content Grid",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_grid_heading", "label": "Heading", "name": "heading", "type": "text" },
+            {
+              "key": "field_grid_post_type",
+              "label": "Post Type",
+              "name": "post_type",
+              "type": "select",
+              "choices": { "post": "Blog Posts", "portfolio": "Portfolio", "team": "Team", "service": "Services" },
+              "default_value": "post"
+            },
+            { "key": "field_grid_count", "label": "Number of Items", "name": "count", "type": "number", "default_value": 6 },
+            {
+              "key": "field_grid_columns",
+              "label": "Columns",
+              "name": "columns",
+              "type": "select",
+              "choices": { "2": "2", "3": "3", "4": "4" },
+              "default_value": "3"
+            }
+          ]
+        },
+        {
+          "key": "layout_team_grid",
+          "name": "team_grid",
+          "title": "Team Grid",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_team_heading", "label": "Heading", "name": "heading", "type": "text" },
+            { "key": "field_team_count", "label": "Number of Members", "name": "count", "type": "number", "default_value": 6 }
+          ]
+        },
+        {
+          "key": "layout_services",
+          "name": "services",
+          "title": "Services",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_services_heading", "label": "Heading", "name": "heading", "type": "text" },
+            {
+              "key": "field_services_style",
+              "label": "Style",
+              "name": "style",
+              "type": "select",
+              "choices": { "grid": "Grid", "list": "List" },
+              "default_value": "grid"
+            }
+          ]
+        },
+        {
+          "key": "layout_text_image",
+          "name": "text_image",
+          "title": "Text + Image",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_ti_heading", "label": "Heading", "name": "heading", "type": "text" },
+            { "key": "field_ti_content", "label": "Content", "name": "content", "type": "wysiwyg", "tabs": "visual" },
+            { "key": "field_ti_image", "label": "Image", "name": "image", "type": "image", "return_format": "array" },
+            {
+              "key": "field_ti_alignment",
+              "label": "Image Alignment",
+              "name": "alignment",
+              "type": "select",
+              "choices": { "left": "Left", "right": "Right" },
+              "default_value": "right"
+            }
+          ]
+        },
+        {
+          "key": "layout_testimonials",
+          "name": "testimonials",
+          "title": "Testimonials",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_test_heading", "label": "Heading", "name": "heading", "type": "text" },
+            {
+              "key": "field_testimonials",
+              "label": "Testimonials",
+              "name": "testimonials",
+              "type": "repeater",
+              "layout": "block",
+              "button_label": "Add Testimonial",
+              "sub_fields": [
+                { "key": "field_test_quote", "label": "Quote", "name": "quote", "type": "textarea", "rows": 3 },
+                { "key": "field_test_author", "label": "Author", "name": "author", "type": "text" },
+                { "key": "field_test_role", "label": "Role", "name": "role", "type": "text" }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "layout_cta",
+          "name": "cta",
+          "title": "Call to Action",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_cta_heading", "label": "Heading", "name": "heading", "type": "text" },
+            { "key": "field_cta_button_text", "label": "Button Text", "name": "button_text", "type": "text" },
+            { "key": "field_cta_button_url", "label": "Button URL", "name": "button_url", "type": "url" },
+            {
+              "key": "field_cta_color",
+              "label": "Background Color",
+              "name": "color",
+              "type": "select",
+              "choices": { "red": "Red", "yellow": "Yellow", "cyan": "Cyan" },
+              "default_value": "red"
+            }
+          ]
+        },
+        {
+          "key": "layout_divider",
+          "name": "divider",
+          "title": "Divider",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_divider_style",
+              "label": "Style",
+              "name": "style",
+              "type": "select",
+              "choices": { "thick": "Thick Border", "color": "Color Bar", "spacer": "Spacer" },
+              "default_value": "thick"
+            },
+            {
+              "key": "field_divider_color",
+              "label": "Color",
+              "name": "color",
+              "type": "select",
+              "choices": { "red": "Red", "yellow": "Yellow", "cyan": "Cyan", "fg": "Black" },
+              "default_value": "red"
+            }
+          ]
+        },
+        {
+          "key": "layout_gallery",
+          "name": "gallery",
+          "title": "Image Gallery",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_gallery_heading", "label": "Heading", "name": "heading", "type": "text" },
+            { "key": "field_gallery_images", "label": "Images", "name": "images", "type": "gallery", "preview_size": "medium" },
+            {
+              "key": "field_gallery_columns",
+              "label": "Columns",
+              "name": "columns",
+              "type": "select",
+              "choices": { "2": "2", "3": "3", "4": "4" },
+              "default_value": "3"
+            }
+          ]
+        },
+        {
+          "key": "layout_faq",
+          "name": "faq",
+          "title": "FAQ",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_faq_heading", "label": "Heading", "name": "heading", "type": "text" },
+            {
+              "key": "field_faq_items",
+              "label": "Questions",
+              "name": "items",
+              "type": "repeater",
+              "layout": "block",
+              "button_label": "Add Question",
+              "sub_fields": [
+                { "key": "field_faq_question", "label": "Question", "name": "question", "type": "text" },
+                { "key": "field_faq_answer", "label": "Answer", "name": "answer", "type": "textarea", "rows": 3 }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "layout_pricing",
+          "name": "pricing",
+          "title": "Pricing Table",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_pricing_heading", "label": "Heading", "name": "heading", "type": "text" },
+            {
+              "key": "field_pricing_tiers",
+              "label": "Tiers",
+              "name": "tiers",
+              "type": "repeater",
+              "layout": "block",
+              "button_label": "Add Tier",
+              "sub_fields": [
+                { "key": "field_pricing_name", "label": "Name", "name": "name", "type": "text" },
+                { "key": "field_pricing_price", "label": "Price", "name": "price", "type": "text" },
+                { "key": "field_pricing_description", "label": "Description", "name": "description", "type": "text" },
+                {
+                  "key": "field_pricing_features",
+                  "label": "Features",
+                  "name": "features",
+                  "type": "repeater",
+                  "layout": "table",
+                  "button_label": "Add Feature",
+                  "sub_fields": [
+                    { "key": "field_pricing_feature", "label": "Feature", "name": "feature", "type": "text" }
+                  ]
+                },
+                { "key": "field_pricing_highlighted", "label": "Highlighted", "name": "highlighted", "type": "true_false", "default_value": 0 }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "layout_contact",
+          "name": "contact",
+          "title": "Contact Form",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_contact_heading", "label": "Heading", "name": "heading", "type": "text" },
+            { "key": "field_contact_email", "label": "Send To Email", "name": "email", "type": "email" },
+            {
+              "key": "field_contact_bg_color",
+              "label": "Background Color",
+              "name": "bg_color",
+              "type": "select",
+              "choices": { "yellow": "Yellow", "cyan": "Cyan", "red": "Red", "white": "White" },
+              "default_value": "yellow"
+            }
+          ]
+        },
+        {
+          "key": "layout_logo_wall",
+          "name": "logo_wall",
+          "title": "Logo Wall",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_logos_heading", "label": "Heading", "name": "heading", "type": "text" },
+            {
+              "key": "field_logos",
+              "label": "Logos",
+              "name": "logos",
+              "type": "repeater",
+              "layout": "table",
+              "button_label": "Add Logo",
+              "sub_fields": [
+                { "key": "field_logo_image", "label": "Image", "name": "image", "type": "image", "return_format": "array" },
+                { "key": "field_logo_name", "label": "Name", "name": "name", "type": "text" }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "layout_features",
+          "name": "features",
+          "title": "Feature List",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_features_heading", "label": "Heading", "name": "heading", "type": "text" },
+            {
+              "key": "field_features",
+              "label": "Features",
+              "name": "features",
+              "type": "repeater",
+              "layout": "block",
+              "button_label": "Add Feature",
+              "sub_fields": [
+                { "key": "field_feature_title", "label": "Title", "name": "title", "type": "text" },
+                { "key": "field_feature_desc", "label": "Description", "name": "description", "type": "text" },
+                {
+                  "key": "field_feature_color",
+                  "label": "Accent Color",
+                  "name": "color",
+                  "type": "select",
+                  "choices": { "cyan": "Cyan", "red": "Red", "yellow": "Yellow" },
+                  "default_value": "cyan"
+                }
+              ]
+            },
+            {
+              "key": "field_features_columns",
+              "label": "Columns",
+              "name": "columns",
+              "type": "select",
+              "choices": { "2": "2", "3": "3" },
+              "default_value": "3"
+            }
+          ]
+        },
+        {
+          "key": "layout_video",
+          "name": "video",
+          "title": "Video Embed",
+          "display": "block",
+          "sub_fields": [
+            { "key": "field_video_heading", "label": "Heading", "name": "heading", "type": "text" },
+            { "key": "field_video_url", "label": "Video URL", "name": "url", "type": "url", "instructions": "YouTube or Vimeo URL" },
+            {
+              "key": "field_video_aspect",
+              "label": "Aspect Ratio",
+              "name": "aspect_ratio",
+              "type": "select",
+              "choices": { "16/9": "16:9", "4/3": "4:3", "1/1": "1:1" },
+              "default_value": "16/9"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      { "param": "post_type", "operator": "==", "value": "page" }
+    ]
+  ],
+  "position": "normal",
+  "style": "seamless",
+  "menu_order": 0,
+  "active": true
+}

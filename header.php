@@ -7,10 +7,10 @@
   <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class( get_theme_mod( 'neobrutheme_body_pattern', true ) ? '' : 'no-pattern' ); ?>>
 <?php wp_body_open(); ?>
 
-<nav class="site-nav sticky top-0 z-50 bg-white border-b-8 border-black">
+<nav class="site-nav <?php echo get_theme_mod( 'neobrutheme_header_sticky', true ) ? 'sticky top-0 z-50' : ''; ?> bg-[var(--header-bg-resolved,var(--color-bg))] border-b-[var(--header-border-width,8px)] border-[var(--color-fg)]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
 
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-3 no-underline">

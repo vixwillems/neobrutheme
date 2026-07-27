@@ -1,6 +1,10 @@
 <?php
 /**
- * ACF integration: JSON sync, options pages, field group registration.
+ * ACF integration: JSON sync, field group registration.
+ *
+ * Field groups are stored in acf-json/ for version control
+ * and loaded automatically by ACF. The programmatic registration
+ * below is a fallback if JSON files don't exist.
  *
  * @package Neobrutheme
  */
@@ -53,7 +57,7 @@ function neobrutheme_register_field_groups() {
 	}
 
 	// Only register programmatically if JSON files don't exist.
-	if ( file_exists( NEOBRUTEME_DIR . '/acf-json/group-options-general.json' ) ) {
+	if ( file_exists( NEOBRUTEME_DIR . '/acf-json/group-options-homepage.json' ) ) {
 		return;
 	}
 
@@ -117,63 +121,61 @@ function neobrutheme_register_field_groups() {
 		),
 	) );
 
-	// ── Color Options ──
+	// ── Page Settings (per-page hero override) ──
 	acf_add_local_field_group( array(
-		'key'    => 'group_options_colors',
-		'title'  => 'Color Settings',
-		'fields' => array(
+		'key'      => 'group_page_settings',
+		'title'    => 'Page Settings',
+		'fields'   => array(
 			array(
-				'key'   => 'field_color_bg',
-				'label' => 'Background Color',
-				'name'  => 'color_bg',
-				'type'  => 'color_picker',
-				'default_value' => '#FFFFFF',
+				'key'          => 'field_hero_bg_image',
+				'label'        => 'Hero Background Image',
+				'name'         => 'hero_background_image',
+				'type'         => 'image',
+				'return_format' => 'array',
+				'preview_size' => 'medium',
 			),
 			array(
-				'key'   => 'field_color_fg',
-				'label' => 'Foreground Color',
-				'name'  => 'color_fg',
-				'type'  => 'color_picker',
-				'default_value' => '#000000',
+				'key'          => 'field_hero_subtitle_text',
+				'label'        => 'Hero Subtitle',
+				'name'         => 'hero_subtitle',
+				'type'         => 'text',
 			),
 			array(
-				'key'   => 'field_color_red',
-				'label' => 'Accent Red',
-				'name'  => 'color_red',
-				'type'  => 'color_picker',
-				'default_value' => '#FF5C5C',
+				'key'           => 'field_hero_bg_color_override',
+				'label'         => 'Hero Background Color',
+				'name'          => 'hero_bg_color',
+				'type'          => 'select',
+				'choices'       => array( '' => 'Default (Customizer)', 'cyan' => 'Cyan', 'yellow' => 'Yellow', 'red' => 'Red', 'white' => 'White' ),
+				'default_value' => '',
 			),
 			array(
-				'key'   => 'field_color_yellow',
-				'label' => 'Secondary Yellow',
-				'name'  => 'color_yellow',
-				'type'  => 'color_picker',
-				'default_value' => '#FFDE59',
+				'key'           => 'field_hero_show_composition_override',
+				'label'         => 'Show Composition Panel',
+				'name'          => 'hero_show_composition',
+				'type'          => 'true_false',
+				'default_value' => 0,
+				'ui'            => 1,
 			),
 			array(
-				'key'   => 'field_color_cyan',
-				'label' => 'Accent Cyan',
-				'name'  => 'color_cyan',
-				'type'  => 'color_picker',
-				'default_value' => '#5CE1E6',
-			),
-			array(
-				'key'   => 'field_color_white',
-				'label' => 'White',
-				'name'  => 'color_white',
-				'type'  => 'color_picker',
-				'default_value' => '#FFFFFF',
+				'key'           => 'field_hide_title',
+				'label'         => 'Hide Page Title',
+				'name'          => 'hide_title',
+				'type'          => 'true_false',
+				'default_value' => 0,
+				'ui'            => 1,
 			),
 		),
 		'location' => array(
 			array(
 				array(
-					'param'    => 'page_template',
+					'param'    => 'post_type',
 					'operator' => '==',
-					'value'    => 'template-settings.php',
+					'value'    => 'page',
 				),
 			),
 		),
+		'position' => 'side',
+		'priority' => 'default',
 	) );
 
 	// ── Homepage Layout (Flexible Content) ──
@@ -396,6 +398,222 @@ function neobrutheme_register_field_groups() {
 							),
 						),
 					),
+					// Divider.
+					array(
+						'key'        => 'layout_divider',
+						'name'       => 'divider',
+						'title'      => 'Divider',
+						'display'    => 'block',
+						'sub_fields' => array(
+							array(
+								'key'           => 'field_divider_style',
+								'label'         => 'Style',
+								'name'          => 'style',
+								'type'          => 'select',
+								'choices'       => array( 'thick' => 'Thick Border', 'color' => 'Color Bar', 'spacer' => 'Spacer' ),
+								'default_value' => 'thick',
+							),
+							array(
+								'key'           => 'field_divider_color',
+								'label'         => 'Color',
+								'name'          => 'color',
+								'type'          => 'select',
+								'choices'       => array( 'red' => 'Red', 'yellow' => 'Yellow', 'cyan' => 'Cyan', 'fg' => 'Black' ),
+								'default_value' => 'red',
+								'conditional_logic' => array(
+									array(
+										array( 'field' => 'field_divider_style', 'operator' => '==', 'value' => 'color' ),
+									),
+								),
+							),
+						),
+					),
+					// Image Gallery.
+					array(
+						'key'        => 'layout_gallery',
+						'name'       => 'gallery',
+						'title'      => 'Image Gallery',
+						'display'    => 'block',
+						'sub_fields' => array(
+							array( 'key' => 'field_gallery_heading', 'label' => 'Heading', 'name' => 'heading', 'type' => 'text' ),
+							array(
+								'key'          => 'field_gallery_images',
+								'label'        => 'Images',
+								'name'         => 'images',
+								'type'         => 'gallery',
+								'preview_size' => 'medium',
+							),
+							array(
+								'key'           => 'field_gallery_columns',
+								'label'         => 'Columns',
+								'name'          => 'columns',
+								'type'          => 'select',
+								'choices'       => array( '2' => '2', '3' => '3', '4' => '4' ),
+								'default_value' => '3',
+							),
+						),
+					),
+					// FAQ / Accordion.
+					array(
+						'key'        => 'layout_faq',
+						'name'       => 'faq',
+						'title'      => 'FAQ',
+						'display'    => 'block',
+						'sub_fields' => array(
+							array( 'key' => 'field_faq_heading', 'label' => 'Heading', 'name' => 'heading', 'type' => 'text' ),
+							array(
+								'key'          => 'field_faq_items',
+								'label'        => 'Questions',
+								'name'         => 'items',
+								'type'         => 'repeater',
+								'layout'       => 'block',
+								'button_label' => 'Add Question',
+								'sub_fields'   => array(
+									array( 'key' => 'field_faq_question', 'label' => 'Question', 'name' => 'question', 'type' => 'text' ),
+									array( 'key' => 'field_faq_answer', 'label' => 'Answer', 'name' => 'answer', 'type' => 'textarea', 'rows' => 3 ),
+								),
+							),
+						),
+					),
+					// Pricing Table.
+					array(
+						'key'        => 'layout_pricing',
+						'name'       => 'pricing',
+						'title'      => 'Pricing Table',
+						'display'    => 'block',
+						'sub_fields' => array(
+							array( 'key' => 'field_pricing_heading', 'label' => 'Heading', 'name' => 'heading', 'type' => 'text' ),
+							array(
+								'key'          => 'field_pricing_tiers',
+								'label'        => 'Tiers',
+								'name'         => 'tiers',
+								'type'         => 'repeater',
+								'layout'       => 'block',
+								'button_label' => 'Add Tier',
+								'sub_fields'   => array(
+									array( 'key' => 'field_pricing_name', 'label' => 'Name', 'name' => 'name', 'type' => 'text' ),
+									array( 'key' => 'field_pricing_price', 'label' => 'Price', 'name' => 'price', 'type' => 'text' ),
+									array( 'key' => 'field_pricing_description', 'label' => 'Description', 'name' => 'description', 'type' => 'text' ),
+									array(
+										'key'          => 'field_pricing_features',
+										'label'        => 'Features',
+										'name'         => 'features',
+										'type'         => 'repeater',
+										'layout'       => 'table',
+										'button_label' => 'Add Feature',
+										'sub_fields'   => array(
+											array( 'key' => 'field_pricing_feature', 'label' => 'Feature', 'name' => 'feature', 'type' => 'text' ),
+										),
+									),
+									array(
+										'key'           => 'field_pricing_highlighted',
+										'label'         => 'Highlighted',
+										'name'          => 'highlighted',
+										'type'          => 'true_false',
+										'default_value' => 0,
+									),
+								),
+							),
+						),
+					),
+					// Contact Form.
+					array(
+						'key'        => 'layout_contact',
+						'name'       => 'contact',
+						'title'      => 'Contact Form',
+						'display'    => 'block',
+						'sub_fields' => array(
+							array( 'key' => 'field_contact_heading', 'label' => 'Heading', 'name' => 'heading', 'type' => 'text' ),
+							array( 'key' => 'field_contact_email', 'label' => 'Send To Email', 'name' => 'email', 'type' => 'email' ),
+							array(
+								'key'           => 'field_contact_bg_color',
+								'label'         => 'Background Color',
+								'name'          => 'bg_color',
+								'type'          => 'select',
+								'choices'       => array( 'yellow' => 'Yellow', 'cyan' => 'Cyan', 'red' => 'Red', 'white' => 'White' ),
+								'default_value' => 'yellow',
+							),
+						),
+					),
+					// Logo Wall.
+					array(
+						'key'        => 'layout_logo_wall',
+						'name'       => 'logo_wall',
+						'title'      => 'Logo Wall',
+						'display'    => 'block',
+						'sub_fields' => array(
+							array( 'key' => 'field_logos_heading', 'label' => 'Heading', 'name' => 'heading', 'type' => 'text' ),
+							array(
+								'key'          => 'field_logos',
+								'label'        => 'Logos',
+								'name'         => 'logos',
+								'type'         => 'repeater',
+								'layout'       => 'table',
+								'button_label' => 'Add Logo',
+								'sub_fields'   => array(
+									array( 'key' => 'field_logo_image', 'label' => 'Image', 'name' => 'image', 'type' => 'image', 'return_format' => 'array' ),
+									array( 'key' => 'field_logo_name', 'label' => 'Name', 'name' => 'name', 'type' => 'text' ),
+								),
+							),
+						),
+					),
+					// Feature List.
+					array(
+						'key'        => 'layout_features',
+						'name'       => 'features',
+						'title'      => 'Feature List',
+						'display'    => 'block',
+						'sub_fields' => array(
+							array( 'key' => 'field_features_heading', 'label' => 'Heading', 'name' => 'heading', 'type' => 'text' ),
+							array(
+								'key'          => 'field_features',
+								'label'        => 'Features',
+								'name'         => 'features',
+								'type'         => 'repeater',
+								'layout'       => 'block',
+								'button_label' => 'Add Feature',
+								'sub_fields'   => array(
+									array( 'key' => 'field_feature_title', 'label' => 'Title', 'name' => 'title', 'type' => 'text' ),
+									array( 'key' => 'field_feature_desc', 'label' => 'Description', 'name' => 'description', 'type' => 'text' ),
+									array(
+										'key'           => 'field_feature_color',
+										'label'         => 'Accent Color',
+										'name'          => 'color',
+										'type'          => 'select',
+										'choices'       => array( 'cyan' => 'Cyan', 'red' => 'Red', 'yellow' => 'Yellow' ),
+										'default_value' => 'cyan',
+									),
+								),
+							),
+							array(
+								'key'           => 'field_features_columns',
+								'label'         => 'Columns',
+								'name'          => 'columns',
+								'type'          => 'select',
+								'choices'       => array( '2' => '2', '3' => '3' ),
+								'default_value' => '3',
+							),
+						),
+					),
+					// Video Embed.
+					array(
+						'key'        => 'layout_video',
+						'name'       => 'video',
+						'title'      => 'Video Embed',
+						'display'    => 'block',
+						'sub_fields' => array(
+							array( 'key' => 'field_video_heading', 'label' => 'Heading', 'name' => 'heading', 'type' => 'text' ),
+							array( 'key' => 'field_video_url', 'label' => 'Video URL', 'name' => 'url', 'type' => 'url', 'instructions' => 'YouTube or Vimeo URL' ),
+							array(
+								'key'           => 'field_video_aspect',
+								'label'         => 'Aspect Ratio',
+								'name'          => 'aspect_ratio',
+								'type'          => 'select',
+								'choices'       => array( '16/9' => '16:9', '4/3' => '4:3', '1/1' => '1:1' ),
+								'default_value' => '16/9',
+							),
+						),
+					),
 				),
 			),
 		),
@@ -408,6 +626,10 @@ function neobrutheme_register_field_groups() {
 				),
 			),
 		),
+		'position'   => 'normal',
+		'style'      => 'seamless',
+		'menu_order' => 0,
+		'active'     => true,
 	) );
 
 	// ── Portfolio Item ──
@@ -418,6 +640,8 @@ function neobrutheme_register_field_groups() {
 			array( 'key' => 'field_portfolio_client', 'label' => 'Client Name', 'name' => 'client_name', 'type' => 'text' ),
 			array( 'key' => 'field_portfolio_date', 'label' => 'Project Date', 'name' => 'project_date', 'type' => 'date_picker', 'display_format' => 'dd/mm/yy', 'return_format' => 'Y-m-d' ),
 			array( 'key' => 'field_portfolio_url', 'label' => 'Project URL', 'name' => 'project_url', 'type' => 'url' ),
+			array( 'key' => 'field_portfolio_tagline', 'label' => 'Tagline', 'name' => 'tagline', 'type' => 'text', 'instructions' => 'Short one-liner shown below the title.' ),
+			array( 'key' => 'field_portfolio_role', 'label' => 'Your Role', 'name' => 'role', 'type' => 'text', 'instructions' => 'e.g. Lead Developer, Designer' ),
 			array(
 				'key'          => 'field_portfolio_tech',
 				'label'        => 'Technologies',
@@ -429,7 +653,15 @@ function neobrutheme_register_field_groups() {
 					array( 'key' => 'field_tech_name', 'label' => 'Technology', 'name' => 'name', 'type' => 'text' ),
 				),
 			),
-			array( 'key' => 'field_portfolio_featured', 'label' => 'Featured', 'name' => 'is_featured', 'type' => 'true_false' ),
+			array( 'key' => 'field_portfolio_featured', 'label' => 'Featured', 'name' => 'is_featured', 'type' => 'true_false', 'ui' => 1 ),
+			array(
+				'key'           => 'field_portfolio_card_color',
+				'label'         => 'Card Accent Color',
+				'name'          => 'card_color',
+				'type'          => 'select',
+				'choices'       => array( '' => 'Auto (cycle)', 'red' => 'Red', 'cyan' => 'Cyan', 'yellow' => 'Yellow' ),
+				'default_value' => '',
+			),
 		),
 		'location' => array(
 			array(
@@ -482,7 +714,7 @@ function neobrutheme_register_field_groups() {
 			array( 'key' => 'field_service_icon', 'label' => 'Icon (emoji or class)', 'name' => 'service_icon', 'type' => 'text' ),
 			array( 'key' => 'field_service_short', 'label' => 'Short Description', 'name' => 'short_description', 'type' => 'textarea', 'rows' => 3 ),
 			array( 'key' => 'field_service_price', 'label' => 'Price Range', 'name' => 'price_range', 'type' => 'text' ),
-			array( 'key' => 'field_service_featured', 'label' => 'Featured', 'name' => 'is_featured', 'type' => 'true_false' ),
+			array( 'key' => 'field_service_featured', 'label' => 'Featured', 'name' => 'is_featured', 'type' => 'true_false', 'ui' => 1 ),
 		),
 		'location' => array(
 			array(
@@ -496,3 +728,9 @@ function neobrutheme_register_field_groups() {
 	) );
 }
 add_action( 'acf/init', 'neobrutheme_register_field_groups' );
+
+/**
+ * Force ACF meta boxes to be visible in the Block Editor.
+ * ACF Free hides them by default — this filter ensures they show.
+ */
+add_filter( 'acf/settings/remove_wp_meta_box', '__return_false' );

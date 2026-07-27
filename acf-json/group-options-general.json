@@ -1,0 +1,48 @@
+{
+  "key": "group_options_general",
+  "title": "General Settings",
+  "fields": [
+    {
+      "key": "field_site_tagline",
+      "label": "Site Tagline",
+      "name": "site_tagline",
+      "type": "text",
+      "instructions": "Displayed below the site title."
+    },
+    {
+      "key": "field_social_links",
+      "label": "Social Links",
+      "name": "social_links",
+      "type": "repeater",
+      "layout": "table",
+      "button_label": "Add Link",
+      "sub_fields": [
+        { "key": "field_social_link_url", "label": "URL", "name": "url", "type": "url" },
+        { "key": "field_social_link_label", "label": "Label", "name": "label", "type": "text" }
+      ]
+    },
+    {
+      "key": "field_footer_text",
+      "label": "Footer Text",
+      "name": "footer_text",
+      "type": "textarea",
+      "rows": 3
+    },
+    {
+      "key": "field_google_analytics_id",
+      "label": "Google Analytics ID",
+      "name": "google_analytics_id",
+      "type": "text",
+      "instructions": "Optional. e.g. G-XXXXXXXXXX"
+    }
+  ],
+  "location": [
+    [
+      { "param": "page_template", "operator": "==", "value": "template-settings.php" }
+    ]
+  ],
+  "position": "normal",
+  "style": "seamless",
+  "menu_order": 0,
+  "active": true
+}

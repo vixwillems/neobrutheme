@@ -25,8 +25,11 @@ require_once NEOBRUTEME_DIR . '/inc/post-types.php';
 // ACF integration.
 require_once NEOBRUTEME_DIR . '/inc/acf-setup.php';
 
-// Color settings (CSS custom properties from ACF).
+// Color settings (CSS custom properties from Customizer).
 require_once NEOBRUTEME_DIR . '/inc/color-settings.php';
+
+// WordPress Customizer settings.
+require_once NEOBRUTEME_DIR . '/inc/customizer.php';
 
 // Custom REST API endpoints.
 require_once NEOBRUTEME_DIR . '/inc/rest-api.php';

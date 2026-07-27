@@ -30,20 +30,20 @@ if (!empty($existing)) {
     echo "Created Settings page (ID: {$settings_id})\n";
 }
 
-// ── 2. Set color values on Settings page ──
+// ── 2. Set color values via Customizer theme mods ──
 $colors = array(
-    'color_bg'     => '#FFFFFF',
-    'color_fg'     => '#000000',
-    'color_red'    => '#FF5C5C',
-    'color_yellow' => '#FFDE59',
-    'color_cyan'   => '#5CE1E6',
-    'color_white'  => '#FFFFFF',
+    'bg'     => '#FFFFFF',
+    'fg'     => '#000000',
+    'red'    => '#FF5C5C',
+    'yellow' => '#FFDE59',
+    'cyan'   => '#5CE1E6',
+    'white'  => '#FFFFFF',
 );
 
-foreach ($colors as $field => $value) {
-    update_field($field, $value, $settings_id);
+foreach ($colors as $name => $value) {
+    set_theme_mod('neobrutheme_color_' . $name, $value);
 }
-echo "Colors set on Settings page\n";
+echo "Colors set via Customizer theme mods\n";
 
 // ── 3. Set homepage layouts on front page ──
 // ACF Flexible Content: sub-fields keyed by field keys (field_hero_heading etc.)
@@ -109,7 +109,7 @@ if (is_array($v)) {
     echo "Layout count: " . count($v) . "\n";
     echo "First layout: " . $v[0]['acf_fc_layout'] . "\n";
 }
-$c = get_field('color_cyan', $settings_id);
+$c = get_theme_mod('neobrutheme_color_cyan', '#5CE1E6');
 echo "Color cyan: " . ($c ?: 'EMPTY') . "\n";
 
 echo "\nDone! Visit the site to see the changes.\n";

@@ -1,0 +1,53 @@
+{
+  "key": "group_page_settings",
+  "title": "Page Settings",
+  "fields": [
+    {
+      "key": "field_hero_bg_image",
+      "label": "Hero Background Image",
+      "name": "hero_background_image",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium"
+    },
+    {
+      "key": "field_hero_subtitle_text",
+      "label": "Hero Subtitle",
+      "name": "hero_subtitle",
+      "type": "text"
+    },
+    {
+      "key": "field_hero_bg_color_override",
+      "label": "Hero Background Color",
+      "name": "hero_bg_color",
+      "type": "select",
+      "choices": { "": "Default (Customizer)", "cyan": "Cyan", "yellow": "Yellow", "red": "Red", "white": "White" },
+      "default_value": ""
+    },
+    {
+      "key": "field_hero_show_composition_override",
+      "label": "Show Composition Panel",
+      "name": "hero_show_composition",
+      "type": "true_false",
+      "default_value": 0,
+      "ui": 1
+    },
+    {
+      "key": "field_hide_title",
+      "label": "Hide Page Title",
+      "name": "hide_title",
+      "type": "true_false",
+      "default_value": 0,
+      "ui": 1
+    }
+  ],
+  "location": [
+    [
+      { "param": "post_type", "operator": "==", "value": "page" }
+    ]
+  ],
+  "position": "side",
+  "style": "default",
+  "menu_order": 0,
+  "active": true
+}

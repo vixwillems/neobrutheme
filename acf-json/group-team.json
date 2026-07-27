@@ -1,0 +1,30 @@
+{
+  "key": "group_team",
+  "title": "Team Member Details",
+  "fields": [
+    { "key": "field_team_role", "label": "Role", "name": "role", "type": "text" },
+    { "key": "field_team_bio", "label": "Bio", "name": "bio", "type": "textarea", "rows": 4 },
+    { "key": "field_team_email", "label": "Email", "name": "email", "type": "email" },
+    {
+      "key": "field_team_social",
+      "label": "Social Links",
+      "name": "social_links",
+      "type": "repeater",
+      "layout": "table",
+      "button_label": "Add Link",
+      "sub_fields": [
+        { "key": "field_team_social_url", "label": "URL", "name": "url", "type": "url" },
+        { "key": "field_team_social_label", "label": "Label", "name": "label", "type": "text" }
+      ]
+    }
+  ],
+  "location": [
+    [
+      { "param": "post_type", "operator": "==", "value": "team" }
+    ]
+  ],
+  "position": "normal",
+  "style": "seamless",
+  "menu_order": 0,
+  "active": true
+}
