@@ -39,6 +39,7 @@ Design system styles live in `assets/css/style.css` (hand-written, not compiled)
 ```
 style.css                    # WordPress metadata + CSS imports
 functions.php                # Bootstrap: requires inc/ files, enqueues assets
+theme.json                   # Site Editor settings: colors, typography, spacing, layout
 header.php                   # Sticky nav, geometric logo, mobile menu
 footer.php                   # Black footer, logo, social links
 index.php                    # Main loop fallback
@@ -93,6 +94,8 @@ inc/
   template-tags.php          # Helper functions
 
 acf-json/                    # ACF field group JSON (auto-synced)
+tools/
+  import-demo.php            # Sample homepage + content importer
 mu-plugins/
   acf-mu-loader.php          # Loads bundled ACF
   acf/                       # ACF Free (bundled)
@@ -107,6 +110,29 @@ mu-plugins/
 | Service | `/services` | Yes | Service offerings |
 
 After activation: **Settings > Permalinks > Save** to register rewrite rules.
+
+### Sample homepage import
+
+Load a demo homepage with all 9 layouts, sample content, and default colors:
+
+```bash
+wp eval-file tools/import-demo.php
+```
+
+This creates a Home page, sets it as the front page, populates all Flexible Content layouts, creates sample Portfolio/Team/Service items, and applies the default color palette. It will not overwrite existing content.
+
+## Site Editor (appearance-tools)
+
+The theme registers `theme.json` (v3) with:
+
+- **Color palette** — matches the ACF color options (Background, Foreground, Accent Red, Secondary Yellow, Accent Cyan, White). Edit these in the Site Editor or via ACF > Colors — both update the same CSS custom properties.
+- **Typography** — Space Grotesk registered as the theme font family with all 3 weights (400, 500, 700) self-hosted. Font sizes from Small to Giant.
+- **Layout** — content: 720px, wide: 1200px.
+- **Spacing** — 9-step scale from X-Small (0.25rem) to XXX-Large (6rem).
+- **Button defaults** — 4px solid black border, Space Grotesk 700, uppercase, hover → red background.
+- **Heading defaults** — 900 weight, uppercase, tight tracking.
+
+The Site Editor's global styles panel, template editing, and block patterns all work out of the box.
 
 ## ACF options pages
 
