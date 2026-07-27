@@ -67,21 +67,21 @@
               "fontWeight": "400",
               "fontStyle": "normal",
               "fontDisplay": "swap",
-              "src": ["../assets/fonts/space-grotesk-400.woff2"]
+              "src": ["assets/fonts/space-grotesk-400.woff2"]
             },
             {
               "fontFamily": "Space Grotesk",
               "fontWeight": "500",
               "fontStyle": "normal",
               "fontDisplay": "swap",
-              "src": ["../assets/fonts/space-grotesk-500.woff2"]
+              "src": ["assets/fonts/space-grotesk-500.woff2"]
             },
             {
               "fontFamily": "Space Grotesk",
               "fontWeight": "700",
               "fontStyle": "normal",
               "fontDisplay": "swap",
-              "src": ["../assets/fonts/space-grotesk-700.woff2"]
+              "src": ["assets/fonts/space-grotesk-700.woff2"]
             }
           ]
         }
@@ -187,8 +187,9 @@
     },
     "typography": {
       "fontFamily": "var(--wp--preset--font-family--space-grotesk)",
-      "fontWeight": "700",
-      "fontSize": "var(--wp--preset--font-size--medium)"
+      "fontWeight": "400",
+      "fontSize": "var(--wp--preset--font-size--medium)",
+      "lineHeight": "1.6"
     },
     "elements": {
       "heading": {

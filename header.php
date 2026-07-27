@@ -26,7 +26,7 @@
       <span id="menu-icon">&#9776;</span>
     </button>
 
-    <div id="desktop-nav" class="hidden md:flex items-center gap-2">
+    <ul id="desktop-nav" class="hidden md:flex items-center gap-2 list-none p-0 m-0">
       <?php
       wp_nav_menu( array(
         'theme_location' => 'primary',
@@ -37,10 +37,10 @@
         'depth'          => 1,
       ) );
       ?>
-    </div>
+    </ul>
   </div>
 
-  <div id="mobile-menu" class="md:hidden hidden border-t-8 border-black bg-white">
+  <ul id="mobile-menu" class="md:hidden hidden list-none p-0 m-0 border-t-8 border-black bg-white">
     <div class="px-4 py-4 flex flex-col gap-2">
       <?php
       wp_nav_menu( array(
@@ -53,7 +53,7 @@
       ) );
       ?>
     </div>
-  </div>
+  </ul>
 </nav>
 
 <script>
@@ -63,8 +63,14 @@
   var icon = document.getElementById('menu-icon');
   if (toggle && menu) {
     toggle.addEventListener('click', function() {
-      var open = menu.classList.toggle('hidden');
-      icon.textContent = open ? '\u2630' : '\u2715';
+      var isOpen = !menu.classList.contains('hidden');
+      if (isOpen) {
+        menu.classList.add('hidden');
+        icon.textContent = '\u2630';
+      } else {
+        menu.classList.remove('hidden');
+        icon.textContent = '\u2715';
+      }
     });
   }
 })();

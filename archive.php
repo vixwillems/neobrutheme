@@ -11,12 +11,12 @@ get_header();
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
   <?php if ( have_posts() ) : ?>
 
-    <header class="mb-10">
+    <header class="archive-header">
       <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">
         <?php the_archive_title(); ?>
       </h1>
-      <?php if ( the_archive_description() ) : ?>
-        <p class="mt-4 text-lg"><?php the_archive_description(); ?></p>
+      <?php if ( get_the_archive_description() ) : ?>
+        <p class="mt-4 text-lg font-bold"><?php echo wp_kses_post( get_the_archive_description() ); ?></p>
       <?php endif; ?>
     </header>
 
@@ -26,7 +26,7 @@ get_header();
       <?php endwhile; ?>
     </div>
 
-    <div class="mt-12">
+    <div class="mt-12 pagination">
       <?php the_posts_pagination(); ?>
     </div>
 

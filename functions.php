@@ -28,6 +28,9 @@ require_once NEOBRUTEME_DIR . '/inc/acf-setup.php';
 // Color settings (CSS custom properties from ACF).
 require_once NEOBRUTEME_DIR . '/inc/color-settings.php';
 
+// Custom REST API endpoints.
+require_once NEOBRUTEME_DIR . '/inc/rest-api.php';
+
 /**
  * Enqueue scripts and styles.
  */

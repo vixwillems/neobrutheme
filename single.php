@@ -18,13 +18,13 @@ get_header();
   </div>
   <?php endif; ?>
 
-  <header class="mb-8">
-    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4">
+  <header class="mb-8 border-b-8 border-black pb-6">
+    <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 leading-none">
       <?php the_title(); ?>
     </h1>
-    <div class="flex flex-wrap items-center gap-3 text-sm font-bold uppercase tracking-wider">
+    <div class="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-wider text-black/50">
       <?php neobrutheme_posted_on(); ?>
-      <span class="w-px h-4 bg-black"></span>
+      <span class="w-px h-4 bg-black/20"></span>
       <?php neobrutheme_posted_by(); ?>
     </div>
   </header>

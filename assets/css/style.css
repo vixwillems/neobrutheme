@@ -44,6 +44,8 @@
 
 body {
   font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
   background-color: var(--color-bg);
   background-image:
     radial-gradient(rgba(0,0,0,.13) 1.5px, transparent 1.5px),
@@ -51,10 +53,14 @@ body {
     linear-gradient(to bottom, rgba(0,0,0,.06) 1px, transparent 1px);
   background-size: 20px 20px, 40px 40px, 40px 40px;
   color: var(--color-fg);
-  font-weight: 700;
 }
 
 a { color: inherit; text-decoration: none; }
+
+/* ── Nav menu reset ── */
+
+.site-nav ul { list-style: none; margin: 0; padding: 0; }
+.site-nav li { margin: 0; }
 
 /* ── Patterns ── */
 
@@ -234,11 +240,15 @@ input[type="checkbox"] {
   border: 4px solid var(--color-fg);
   border-radius: 0;
   box-shadow: 8px 8px 0 0 var(--color-fg);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.15s linear, box-shadow 0.15s linear;
 }
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 12px 12px 0 0 var(--color-fg);
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 0 var(--color-fg);
+}
+.card:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
 }
 
 /* ── Timeline ── */
@@ -309,11 +319,95 @@ input[type="checkbox"] {
 
 /* ── Rich Text Output ── */
 
-.rich-text { line-height: 1.7; }
-.rich-text p { margin-bottom: .75rem; }
-.rich-text img { max-width: 100%; height: auto; border: 4px solid var(--color-fg); margin: 1rem 0; }
-.rich-text a { text-decoration: underline; text-underline-offset: 3px; }
+.rich-text {
+  line-height: 1.7;
+  font-weight: 400;
+}
+.rich-text > *:first-child { margin-top: 0; }
+.rich-text > *:last-child { margin-bottom: 0; }
+.rich-text p { margin-bottom: 1.25rem; }
+.rich-text h2 {
+  font-size: 1.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
+}
+.rich-text h3 {
+  font-size: 1.35rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.rich-text ul, .rich-text ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+.rich-text ul { list-style-type: disc; }
+.rich-text ol { list-style-type: decimal; }
+.rich-text li {
+  margin-bottom: 0.4rem;
+  padding-left: 0.25rem;
+}
+.rich-text li::marker {
+  font-weight: 900;
+  color: var(--color-red);
+}
+.rich-text blockquote {
+  border-left: 8px solid var(--color-fg);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  background: var(--color-yellow);
+  font-style: italic;
+  font-weight: 500;
+}
+.rich-text blockquote p:last-child { margin-bottom: 0; }
+.rich-text pre {
+  background: var(--color-fg);
+  color: var(--color-bg);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border: 4px solid var(--color-fg);
+}
+.rich-text code {
+  background: var(--color-fg);
+  color: var(--color-bg);
+  padding: 0.15em 0.4em;
+  font-size: 0.875em;
+  font-weight: 700;
+}
+.rich-text pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+.rich-text img {
+  max-width: 100%;
+  height: auto;
+  border: 4px solid var(--color-fg);
+  box-shadow: 8px 8px 0 0 var(--color-fg);
+  margin: 1.5rem 0;
+}
+.rich-text a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 3px;
+}
 .rich-text a:hover { color: var(--color-red); }
+.rich-text hr {
+  border: none;
+  border-top: 4px solid var(--color-fg);
+  margin: 2rem 0;
+}
 
 /* ── WordPress Specific ── */
 
@@ -328,6 +422,95 @@ input[type="checkbox"] {
   clip-path: inset(50%); height: 1px; margin: -1px;
   overflow: hidden; padding: 0; position: absolute;
   width: 1px; word-wrap: normal !important;
+}
+
+/* ── Page header (archive pages) ── */
+
+.archive-header {
+  border-bottom: 8px solid var(--color-fg);
+  padding-bottom: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Post card enhancements ── */
+
+.post-card {
+  background: var(--color-bg);
+  border: 4px solid var(--color-fg);
+  box-shadow: 8px 8px 0 0 var(--color-fg);
+  transition: transform 0.15s linear, box-shadow 0.15s linear;
+  overflow: hidden;
+}
+.post-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 0 var(--color-fg);
+}
+.post-card:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+.post-card .card-accent {
+  height: 8px;
+  background: var(--color-cyan);
+}
+.post-card:nth-child(3n+2) .card-accent { background: var(--color-red); }
+.post-card:nth-child(3n+0) .card-accent { background: var(--color-yellow); }
+
+/* ── Portfolio card ── */
+
+.portfolio-card {
+  background: var(--color-bg);
+  border: 4px solid var(--color-fg);
+  box-shadow: 8px 8px 0 0 var(--color-fg);
+  transition: transform 0.15s linear, box-shadow 0.15s linear;
+  overflow: hidden;
+}
+.portfolio-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 0 var(--color-fg);
+}
+.portfolio-card:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+.portfolio-card .card-accent {
+  height: 8px;
+  background: var(--color-yellow);
+}
+.portfolio-card:nth-child(3n+2) .card-accent { background: var(--color-cyan); }
+.portfolio-card:nth-child(3n+0) .card-accent { background: var(--color-red); }
+
+/* ── Pagination ── */
+
+.pagination .nav-links {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  border: 4px solid var(--color-fg);
+  background: var(--color-bg);
+  transition: all 0.1s linear;
+}
+.pagination .page-numbers:hover {
+  background: var(--color-cyan);
+}
+.pagination .page-numbers.current {
+  background: var(--color-fg);
+  color: var(--color-bg);
+}
+.pagination .page-numbers:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
 }
 
 /* ── Responsive ── */

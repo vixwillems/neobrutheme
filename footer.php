@@ -18,7 +18,7 @@
       </div>
 
       <?php if ( has_nav_menu( 'footer' ) ) : ?>
-      <div class="flex items-center justify-center flex-wrap gap-3 sm:gap-4 opacity-70">
+      <ul class="flex items-center justify-center flex-wrap gap-3 sm:gap-4 opacity-70 list-none p-0 m-0">
         <?php
         wp_nav_menu( array(
           'theme_location' => 'footer',
@@ -30,7 +30,7 @@
           'echo'           => false,
         ) );
         ?>
-      </div>
+      </ul>
       <?php endif; ?>
 
     </div>
