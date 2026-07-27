@@ -1,0 +1,21 @@
+/*
+Theme Name: Neobrutheme
+Theme URI: https://github.com/vixwillems/neobrutheme
+Author: Vix Willems
+Author URI: https://vix.coffee
+Description: A neo-brutalist WordPress theme. Thick borders, solid zero-blur shadows, high-saturation colors, mechanical push-down interactions. Anti-corporate, maximalist, raw.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.5
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: neobrutheme
+Tags: one-column, two-columns, right-sidebar, custom-background, custom-logo, editor-style, featured-images, footer-widgets, full-width-template, theme-options, translation-ready
+*/
+
+/* Compiled Tailwind utilities */
+@import url('assets/css/tailwind.css');
+
+/* Neo-brutalist design system */
+@import url('assets/css/style.css');

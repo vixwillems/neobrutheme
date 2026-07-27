@@ -1,0 +1,345 @@
+/* ═══════════════════════════════════════════════════
+   Neo-Brutalist Design System — neobrutheme
+   Adapted from vix.coffee
+   ═══════════════════════════════════════════════════ */
+
+/* ── Font Face (Self-Hosted Space Grotesk) ── */
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/space-grotesk-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/space-grotesk-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/space-grotesk-700.woff2') format('woff2');
+}
+
+/* ── CSS Custom Properties (Defaults — overridden by ACF in wp_head) ── */
+
+:root {
+  --color-bg: #FFFFFF;
+  --color-fg: #000000;
+  --color-red: #FF5C5C;
+  --color-yellow: #FFDE59;
+  --color-cyan: #5CE1E6;
+  --color-white: #FFFFFF;
+}
+
+/* ── Reset & Base ── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(rgba(0,0,0,.13) 1.5px, transparent 1.5px),
+    linear-gradient(to right, rgba(0,0,0,.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,.06) 1px, transparent 1px);
+  background-size: 20px 20px, 40px 40px, 40px 40px;
+  color: var(--color-fg);
+  font-weight: 700;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── Patterns ── */
+
+.bg-halftone {
+  background-image: radial-gradient(var(--color-fg) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+.bg-halftone--white {
+  background-image: radial-gradient(rgba(255,255,255,.3) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,.1) 1px, transparent 1px);
+}
+
+/* ── Display Stroke ── */
+
+.display-stroke {
+  -webkit-text-stroke: 3px var(--color-fg);
+  color: transparent;
+}
+.display-stroke a:hover {
+  color: var(--color-red);
+}
+.text-stroke-2 {
+  -webkit-text-stroke: 2px var(--color-fg);
+  color: transparent;
+}
+
+/* ── Brutalist Shadows ── */
+
+.brutalist-shadow { box-shadow: 8px 8px 0 0 var(--color-fg); }
+.brutalist-shadow-sm { box-shadow: 4px 4px 0 0 var(--color-fg); }
+.brutalist-shadow-lg { box-shadow: 12px 12px 0 0 var(--color-fg); }
+.brutalist-shadow-xl { box-shadow: 16px 16px 0 0 var(--color-fg); }
+
+/* ── Geometric Shapes ── */
+
+.geo-circle { border-radius: 9999px; }
+.geo-triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.geo-diamond { transform: rotate(45deg); }
+
+/* ── Hero Composition Panel ── */
+
+.hero-composition {
+  position: relative; min-height: 360px; overflow: hidden;
+}
+.hero-composition .shape { position: absolute; }
+.hero-composition .shape-circle {
+  width: 140px; height: 140px;
+  border-radius: 9999px;
+  background: var(--color-red);
+  top: 6%; right: 10%;
+  border: 4px solid var(--color-fg);
+}
+.hero-composition .shape-sticker {
+  width: 100px; height: 100px;
+  background: var(--color-yellow);
+  top: 50%; right: 30%;
+  transform: rotate(12deg);
+  border: 4px solid var(--color-fg);
+  box-shadow: 6px 6px 0 0 var(--color-fg);
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-composition .shape-frame {
+  width: 150px; height: 150px;
+  border: 8px solid rgba(255,255,255,.8);
+  top: 8%; right: 38%;
+}
+.hero-composition .shape-triangle {
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,.8);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+.hero-composition .shape-dot-grid {
+  position: absolute; inset: 0;
+  opacity: .15;
+  background-image: radial-gradient(rgba(255,255,255,.5) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+}
+
+/* ── Stat Shapes ── */
+
+.stat-shape {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 90px; height: 90px;
+  font-weight: 900; font-size: 2rem; line-height: 1;
+  border: 4px solid var(--color-fg);
+}
+.stat-shape--circle { border-radius: 9999px; }
+.stat-shape--diamond { transform: rotate(45deg); }
+.stat-shape--diamond > * { transform: rotate(-45deg); }
+
+/* ── Buttons ── */
+
+.btn {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  font-size: .75rem; padding: .6rem 1.2rem;
+  cursor: pointer; transition: all .1s linear;
+  text-decoration: none; white-space: nowrap;
+  border: 4px solid var(--color-fg);
+}
+.btn:active {
+  transform: translate(4px, 4px) !important;
+  box-shadow: none !important;
+}
+
+/* ── Form Inputs ── */
+
+input, textarea, select {
+  border: 4px solid var(--color-fg) !important;
+  border-radius: 0 !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  padding: .75rem 1rem !important;
+  background: var(--color-bg) !important;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none !important;
+  box-shadow: 6px 6px 0 0 var(--color-fg) !important;
+  border-color: var(--color-fg) !important;
+  background: var(--color-yellow) !important;
+}
+input::placeholder, textarea::placeholder {
+  color: rgba(0,0,0,.35) !important;
+  font-weight: 700 !important;
+}
+input[type="checkbox"] {
+  width: 1.3rem !important; height: 1.3rem !important;
+  cursor: pointer !important;
+  accent-color: var(--color-red);
+}
+
+/* ── Tables ── */
+
+.data-table {
+  width: 100%; border-collapse: collapse;
+}
+.data-table th {
+  border: 4px solid var(--color-fg); padding: .8rem 1rem;
+  font-weight: 900; text-transform: uppercase;
+  font-size: .7rem; letter-spacing: .1em;
+  background: var(--color-bg); text-align: left; user-select: none;
+}
+.data-table td {
+  border: 4px solid var(--color-fg); padding: .65rem 1rem;
+  font-size: .85rem; font-weight: 700;
+}
+.data-table tbody tr:nth-child(even) { background: var(--color-cyan); }
+.data-table tbody tr:nth-child(odd) { background: var(--color-bg); }
+.data-table tbody tr:hover { background: var(--color-yellow); }
+.data-table a {
+  font-weight: 700; text-decoration: underline; text-underline-offset: 3px;
+}
+.data-table a:hover { color: var(--color-red); }
+
+/* ── Cards ── */
+
+.card {
+  background: var(--color-bg);
+  border: 4px solid var(--color-fg);
+  border-radius: 0;
+  box-shadow: 8px 8px 0 0 var(--color-fg);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 12px 12px 0 0 var(--color-fg);
+}
+
+/* ── Timeline ── */
+
+.timeline-item {
+  position: relative;
+  padding-left: 2.5rem;
+  padding-bottom: 1.5rem;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-fg);
+}
+.timeline-item:last-child::before { display: none; }
+.timeline-item .dot {
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 3px solid var(--color-fg);
+  border-radius: 50%;
+  background: var(--color-yellow);
+  z-index: 1;
+}
+.timeline-item .dot.red { background: var(--color-red); }
+.timeline-item .dot.cyan { background: var(--color-cyan); }
+
+/* ── Animations ── */
+
+@keyframes floatSticker {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+.animate-float { animation: floatSticker 3s ease-in-out infinite; }
+
+@keyframes pulseNeo {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.animate-pulse-neo { animation: pulseNeo 2s ease-in-out infinite; }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 20s linear infinite; }
+.animate-marquee-slow { animation: marquee 30s linear infinite; }
+.animate-marquee-fast { animation: marquee 12s linear infinite; }
+
+/* ── Fade-in / Stagger ── */
+
+[data-fade-in],
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-in-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ── Rich Text Output ── */
+
+.rich-text { line-height: 1.7; }
+.rich-text p { margin-bottom: .75rem; }
+.rich-text img { max-width: 100%; height: auto; border: 4px solid var(--color-fg); margin: 1rem 0; }
+.rich-text a { text-decoration: underline; text-underline-offset: 3px; }
+.rich-text a:hover { color: var(--color-red); }
+
+/* ── WordPress Specific ── */
+
+.wp-caption { max-width: 100%; }
+.wp-caption img { border: 4px solid var(--color-fg); display: block; }
+.wp-caption-text {
+  font-size: .85rem; font-weight: 700;
+  padding: .5rem 0; text-align: center;
+}
+.screen-reader-text {
+  border: 0; clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%); height: 1px; margin: -1px;
+  overflow: hidden; padding: 0; position: absolute;
+  width: 1px; word-wrap: normal !important;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+  .hero-composition { display: none; }
+  .stat-shape { width: 65px; height: 65px; font-size: 1.4rem; }
+  .display-stroke { -webkit-text-stroke: 2px var(--color-fg); }
+}
+
+/* ── Print ── */
+
+@media print {
+  .site-nav, .site-footer, .btn { display: none !important; }
+}

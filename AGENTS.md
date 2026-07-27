@@ -9,7 +9,7 @@
 - Vanilla JS (no jQuery)
 
 ## Project status
-Early stage. Only `PLAN.md` and `.gitignore` exist. No theme files, no `node_modules`, no build output yet. Follow `PLAN.md` file creation order when implementing.
+Full theme scaffolded. All templates, ACF field groups, CPTs, flexible layouts, and design system are in place. A screenshot.png placeholder exists — replace with a real 1200×900 capture.
 
 ## Build
 ```bash

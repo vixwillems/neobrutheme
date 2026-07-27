@@ -32,6 +32,13 @@ wp-config.php
 # Log files
 *.log
 
+# Node
+node_modules/
+
+# Build output
+# assets/css/tailwind.css is committed — do NOT ignore
+assets/css/app.js
+
 # htaccess
 /.htaccess
 
