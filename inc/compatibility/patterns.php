@@ -32,6 +32,7 @@ class Patterns {
 		'gallery-title-buttons',
 		'light-header-left-aligned-content',
 		'brutheme-timeline',
+		'brutheme-page-head',
 	];
 
 	/**

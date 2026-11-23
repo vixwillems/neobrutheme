@@ -149,6 +149,27 @@ function brutheme_hide_page_title() {
 add_action( 'neve_before_page_header', 'brutheme_hide_page_title' );
 
 /**
+ * Render a brutalist header on the blog index.
+ *
+ * Neve hides the native archive title by default, which left the blog
+ * without an H1. This additive hook restores a proper header using the
+ * same .br-page-head components as the static pages.
+ */
+function brutheme_blog_archive_header() {
+	if ( ! is_home() ) {
+		return;
+	}
+	?>
+	<header class="br-archive-head br-page-head">
+		<p class="br-kicker"><?php esc_html_e( 'Notes & writing', 'neve' ); ?></p>
+		<h1><?php esc_html_e( 'Blog', 'neve' ); ?></h1>
+		<p class="br-lead"><?php esc_html_e( 'Field notes on law, student advocacy, accessibility, photography and coffee.', 'neve' ); ?></p>
+	</header>
+	<?php
+}
+add_action( 'neve_before_posts_loop', 'brutheme_blog_archive_header' );
+
+/**
  * Dequeue the Google Fonts stylesheet for Space Grotesk on the front end.
  * Font_Manager registers it at priority 200; we run afterwards.
  */
