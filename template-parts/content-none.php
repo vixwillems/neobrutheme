@@ -1,17 +1,8 @@
 <?php
 /**
- * Template part: No results found.
+ * Author:          Andrei Baicus <andrei@themeisle.com>
+ * Created on:      04/09/2018
  *
- * @package Neobrutheme
+ * @package Neve
  */
-?>
-
-<div class="text-center py-20">
-  <h2 class="text-4xl font-black uppercase tracking-tighter mb-4">
-    <?php esc_html_e( 'Nothing Found', 'neobrutheme' ); ?>
-  </h2>
-  <p class="text-lg font-bold mb-8">
-    <?php esc_html_e( 'It seems we can\'t find what you\'re looking for.', 'neobrutheme' ); ?>
-  </p>
-  <?php get_search_form(); ?>
-</div>
+do_action( 'neve_do_content_none' );

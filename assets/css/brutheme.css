@@ -1,0 +1,1295 @@
+/* ═══════════════════════════════════════════════════════════════
+   Brutheme — Neo-Brutalist Skin (built on the Neve framework)
+   Thick borders, solid zero-blur shadows, high-saturation colors,
+   mechanical push-down interactions. Anti-corporate, loud, raw.
+   Loads AFTER Neve's core stylesheet.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Self-Hosted Space Grotesk ─────────────────────────────── */
+
+@font-face {
+	font-family: 'Space Grotesk';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('../fonts/space-grotesk-400.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Space Grotesk';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('../fonts/space-grotesk-500.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Space Grotesk';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('../fonts/space-grotesk-700.woff2') format('woff2');
+}
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+
+:root {
+	--br-bg: var(--nv-site-bg, #ffffff);
+	--br-fg: var(--nv-text-color, #000000);
+	--br-red: var(--nv-primary-accent, #ff5c5c);
+	--br-yellow: var(--nv-secondary-accent, #ffde59);
+	--br-cyan: var(--nv-c-1, #5ce1e6);
+	--br-border: 4px;
+	--br-border-lg: 8px;
+	--br-shadow-sm: 4px 4px 0 0 var(--br-fg);
+	--br-shadow: 8px 8px 0 0 var(--br-fg);
+	--br-shadow-lg: 12px 12px 0 0 var(--br-fg);
+	--br-shadow-xl: 16px 16px 0 0 var(--br-fg);
+}
+
+/* ── Base / Reset ──────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Space Grotesk', var(--nv-fallback-ff, sans-serif);
+	font-weight: var(--bodyfontweight, 500);
+	background-color: var(--br-bg);
+	color: var(--br-fg);
+	background-image:
+		radial-gradient(rgba(0, 0, 0, 0.13) 1.5px, transparent 1.5px),
+		linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+	background-size: 20px 20px, 40px 40px, 40px 40px;
+}
+
+h1, h2, h3, h4, h5, h6,
+.entry-title,
+.blog-entry-title,
+.nv-page-title {
+	font-family: 'Space Grotesk', var(--nv-fallback-ff, sans-serif);
+	text-transform: uppercase;
+	letter-spacing: -0.02em;
+	line-height: 1.1;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	border-radius: 0;
+}
+
+/* ── Kill Neve's soft radius everywhere ─────────────────────── */
+
+.nv-index-posts .layout-grid .article-content-col,
+.nv-index-posts .layout-default,
+.nv-index-posts .layout-covers .article-content-col,
+.nv-single-post-wrap,
+.nv-is-boxed,
+.comment-form input,
+.comment-form textarea,
+.search-form .search-field,
+.woocommerce input[type="text"],
+.woocommerce input[type="email"],
+.woocommerce input[type="tel"],
+.woocommerce input[type="number"],
+.woocommerce input[type="password"],
+.woocommerce textarea,
+.woocommerce select,
+select,
+input,
+textarea,
+.button,
+.button.button-primary,
+.button.button-secondary,
+.wp-block-button__link,
+.page-numbers a,
+.page-numbers span,
+.page-numbers input[type="submit"],
+.wp-block-quote,
+.wp-block-pullquote,
+pre,
+.nv-tags-list a,
+.nv-comment-content,
+.widget_calendar td,
+.widget_calendar th {
+	border-radius: 0 !important;
+}
+
+/* ── Buttons: vix.coffee mechanical push-down ───────────────── */
+
+.button,
+.button.button-primary,
+.button.button-secondary,
+.wp-block-button__link,
+.wp-block-button.is-style-primary .wp-block-button__link,
+.wp-block-button.is-style-secondary .wp-block-button__link,
+.nv-sidebar-wrap .button,
+.wp-block-search__button,
+button[type="submit"],
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce #respond input#submit {
+	font-family: 'Space Grotesk', var(--nv-fallback-ff, sans-serif);
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	font-size: 0.75rem;
+	padding: 0.6rem 1.2rem;
+	border: var(--br-border) solid var(--br-fg) !important;
+	border-radius: 0 !important;
+	box-shadow: 4px 4px 0 0 var(--br-fg) !important;
+	transition: transform 0.1s linear, box-shadow 0.1s linear, background 0.1s linear;
+}
+
+.button:active,
+.button.button-primary:active,
+.button.button-secondary:active,
+.wp-block-button__link:active,
+button[type="submit"]:active,
+.woocommerce a.button:active,
+.woocommerce button.button:active,
+.woocommerce input.button:active,
+.woocommerce #respond input#submit:active {
+	transform: translate(4px, 4px);
+	box-shadow: none !important;
+}
+
+.button:hover,
+.button.button-primary:hover,
+.button.button-secondary:hover,
+.wp-block-button__link:hover,
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover {
+	background: var(--br-cyan) !important;
+	color: var(--br-fg) !important;
+}
+
+/* vix.coffee variants: yellow primary, white secondary. */
+.button.button-primary,
+.wp-block-button.is-style-primary .wp-block-button__link {
+	background: var(--br-yellow) !important;
+	color: var(--br-fg) !important;
+	border-color: var(--br-fg) !important;
+}
+
+.button.button-secondary,
+.wp-block-button.is-style-secondary .wp-block-button__link {
+	background: var(--br-bg) !important;
+	color: var(--br-fg) !important;
+	border-color: var(--br-fg) !important;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+
+.hfg_header.site-header {
+	border-bottom: var(--br-border-lg) solid var(--br-fg);
+	background: var(--br-bg);
+}
+
+.header--row-inner {
+	border-radius: 0;
+}
+
+.hfg_header .builder-item .item--inner,
+.hfg_header .nav-ul a,
+.hfg_header .nav-ul .sub-menu,
+.hfg_header .navbar-toggle,
+.header-menu-sidebar {
+	font-family: 'Space Grotesk', var(--nv-fallback-ff, sans-serif);
+}
+
+.nav-ul li a {
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	font-size: 0.875rem;
+	padding: 8px 16px !important;
+	border: var(--br-border) solid transparent;
+	border-radius: 0;
+	transition: background 0.1s linear, border-color 0.1s linear;
+}
+
+/* vix.coffee-style nav: hover = cyan fill, active = yellow fill. */
+.nav-ul li a:hover {
+	background: var(--br-cyan);
+	border-color: var(--br-fg);
+}
+
+.nav-ul li.nv-active a,
+.nav-ul li.current-menu-item a {
+	background: var(--br-yellow);
+	border-color: var(--br-fg);
+}
+
+.hfg_header .nav-ul li {
+	border-bottom: 0;
+}
+
+/* Mobile drawer: full-width vix.coffee-style links. */
+.header-menu-sidebar .nav-ul li a {
+	display: block;
+	padding: 12px 16px !important;
+	border: var(--br-border) solid transparent;
+}
+
+.header-menu-sidebar .nav-ul li a:hover {
+	background: var(--br-cyan);
+	border-color: var(--br-fg);
+}
+
+.header-menu-sidebar .nav-ul li.nv-active a,
+.header-menu-sidebar .nav-ul li.current-menu-item a {
+	background: var(--br-yellow);
+	border-color: var(--br-fg);
+}
+
+/* Site logo / title */
+.hfg_header .site-logo {
+	line-height: 1;
+	display: flex;
+	align-items: center;
+}
+
+.hfg_header .site-logo .site-title {
+	text-transform: uppercase;
+	font-weight: 900;
+	letter-spacing: -0.03em;
+}
+
+.hfg_header .site-logo small {
+	display: block;
+	margin-top: 2px;
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-weight: 700;
+	opacity: 0.7;
+}
+
+/* Mobile toggle — vix.coffee style: 48x48 square, white, black border. */
+.navbar-toggle {
+	border: var(--br-border) solid var(--br-fg) !important;
+	border-radius: 0 !important;
+	box-shadow: var(--br-shadow-sm) !important;
+	background: var(--br-bg) !important;
+	width: 48px;
+	height: 48px;
+}
+
+.navbar-toggle .icon-bar {
+	background: var(--br-fg) !important;
+}
+
+.navbar-toggle:hover .icon-bar {
+	background: var(--br-bg) !important;
+}
+
+.navbar-toggle:hover {
+	background: var(--br-cyan) !important;
+	border-color: var(--br-fg) !important;
+}
+
+/* Header menu sidebar (mobile drawer) */
+.header-menu-sidebar {
+	border-right: var(--br-border-lg) solid var(--br-fg);
+	border-radius: 0;
+}
+
+.header-menu-sidebar .close-sidebar-panel .navbar-toggle {
+	box-shadow: none !important;
+}
+
+/* Search */
+.menu-item-nav-search .nv-nav-search,
+.nv-nav-search {
+	border: var(--br-border) solid var(--br-fg) !important;
+	border-radius: 0 !important;
+	box-shadow: var(--br-shadow) !important;
+}
+
+/* ── Nav drop-downs ─────────────────────────────────────────── */
+
+.nav-ul .sub-menu {
+	border: var(--br-border) solid var(--br-fg);
+	border-radius: 0;
+	box-shadow: var(--br-shadow);
+	background: var(--br-bg);
+}
+
+.nav-ul .sub-menu a {
+	font-weight: 700;
+}
+
+.nav-ul li a:hover,
+.nav-ul li.nv-active a {
+	color: var(--br-red);
+}
+
+/* ── Main content container ─────────────────────────────────── */
+
+.container,
+.container-fluid {
+	border-radius: 0;
+}
+
+.neve-main {
+	background: transparent;
+}
+
+/* ── Blog cards ─────────────────────────────────────────────── */
+
+.nv-index-posts .layout-grid .article-content-col,
+.nv-index-posts .layout-default {
+	border: var(--br-border) solid var(--br-fg);
+	border-radius: 0 !important;
+	box-shadow: var(--br-shadow);
+	background: var(--br-bg);
+	transition: transform 0.15s linear, box-shadow 0.15s linear;
+}
+
+.nv-index-posts .layout-grid .article-content-col:hover,
+.nv-index-posts .layout-default:hover {
+	transform: translate(-2px, -2px);
+	box-shadow: var(--br-shadow-xl);
+}
+
+.nv-index-posts .layout-grid .article-content-col .content,
+.nv-index-posts .layout-default .default-layout-content {
+	padding: 20px;
+}
+
+.nv-index-posts .article-content-col .blog-entry-title a {
+	text-transform: uppercase;
+	font-weight: 900;
+	letter-spacing: -0.02em;
+}
+
+.nv-post-thumbnail-wrap {
+	border-bottom: var(--br-border) solid var(--br-fg);
+}
+
+.nv-post-thumbnail-wrap img {
+	border-radius: 0;
+	filter: grayscale(1);
+	transition: filter 0.2s linear;
+}
+
+.nv-post-thumbnail-wrap img:hover {
+	filter: grayscale(0);
+}
+
+/* Meta */
+.nv-meta-list {
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-size: 0.7rem;
+}
+
+/* Tags */
+.nv-tags-list a,
+.nv-tags-list span {
+	background: var(--br-yellow) !important;
+	color: var(--br-fg) !important;
+	border: var(--br-border) solid var(--br-fg);
+	border-radius: 0 !important;
+	padding: 6px 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	font-size: 0.7rem !important;
+	box-shadow: var(--br-shadow-sm);
+	margin: 0 6px 6px 0;
+	display: inline-block;
+}
+
+.nv-tags-list a:hover {
+	background: var(--br-cyan) !important;
+}
+
+/* ── Page header ────────────────────────────────────────────── */
+
+.nv-page-title-wrap {
+	background: var(--br-bg);
+	border-bottom: var(--br-border) solid var(--br-fg);
+	margin-bottom: 24px;
+}
+
+.nv-page-title {
+	font-size: 2.5rem;
+}
+
+/* ── Single post ────────────────────────────────────────────── */
+
+.nv-single-post-wrap > .entry-header {
+	border-bottom: var(--br-border) solid var(--br-fg);
+	margin-bottom: 24px;
+	padding-bottom: 16px;
+}
+
+.entry-content a {
+	font-weight: 700;
+	text-decoration: underline;
+	text-decoration-thickness: 3px;
+	text-underline-offset: 3px;
+}
+
+.entry-content a:hover {
+	color: var(--br-red);
+}
+
+.entry-content blockquote,
+.wp-block-quote {
+	border-left: var(--br-border-lg) solid var(--br-fg);
+	background: var(--br-yellow);
+	padding: 20px 24px;
+	border-radius: 0;
+}
+
+.entry-content img,
+.entry-content .wp-block-image img {
+	border-radius: 0;
+	border: var(--br-border) solid var(--br-fg);
+	box-shadow: var(--br-shadow);
+}
+
+.entry-content pre,
+.wp-block-preformatted,
+.wp-block-code {
+	background: var(--br-fg);
+	color: var(--br-bg);
+	border: var(--br-border) solid var(--br-fg);
+	border-radius: 0;
+	padding: 20px;
+}
+
+.entry-content hr,
+.wp-block-separator {
+	border-top: var(--br-border) solid var(--br-fg);
+}
+
+.entry-content table,
+.wp-block-table {
+	border: var(--br-border) solid var(--br-fg);
+	border-collapse: collapse;
+}
+
+.entry-content th,
+.wp-block-table th {
+	background: var(--br-cyan);
+	border: var(--br-border) solid var(--br-fg);
+	font-weight: 900;
+	text-transform: uppercase;
+}
+
+.entry-content td,
+.wp-block-table td {
+	border: var(--br-border) solid var(--br-fg);
+}
+
+/* ── Pagination ─────────────────────────────────────────────── */
+
+.page-numbers {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	margin-top: 30px;
+}
+
+.page-numbers a,
+.page-numbers span,
+.page-numbers input[type="submit"] {
+	background: var(--br-bg) !important;
+	color: var(--br-fg) !important;
+	border: var(--br-border) solid var(--br-fg) !important;
+	border-radius: 0 !important;
+	box-shadow: var(--br-shadow-sm);
+	font-weight: 700;
+	min-width: 44px;
+	height: 44px;
+	line-height: 36px;
+	text-align: center;
+	padding: 0 12px !important;
+}
+
+.page-numbers a:hover {
+	background: var(--br-cyan) !important;
+	box-shadow: var(--br-shadow);
+}
+
+.page-numbers .current,
+.page-numbers span.current {
+	background: var(--br-fg) !important;
+	color: var(--br-bg) !important;
+	box-shadow: none;
+}
+
+.page-numbers a:active {
+	transform: translate(2px, 2px);
+	box-shadow: none;
+}
+
+/* ── Forms ──────────────────────────────────────────────────── */
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="range"]),
+textarea,
+select,
+.comment-form input,
+.comment-form textarea,
+.search-form .search-field,
+.wp-block-search__input {
+	border: var(--br-border) solid var(--br-fg) !important;
+	border-radius: 0 !important;
+	font-family: 'Space Grotesk', var(--nv-fallback-ff, sans-serif);
+	font-weight: 700;
+	background: var(--br-bg) !important;
+	box-shadow: none;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="range"]):focus,
+textarea:focus,
+select:focus,
+.comment-form input:focus,
+.comment-form textarea:focus,
+.search-form .search-field:focus,
+.wp-block-search__input:focus {
+	outline: none !important;
+	border-color: var(--br-fg) !important;
+	background: var(--br-yellow) !important;
+	box-shadow: var(--br-shadow) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: rgba(0, 0, 0, 0.4);
+	font-weight: 700;
+}
+
+/* ── Sidebar / Widgets ──────────────────────────────────────── */
+
+.nv-sidebar-wrap .widget {
+	border: var(--br-border) solid var(--br-fg);
+	box-shadow: var(--br-shadow);
+	padding: 20px;
+	background: var(--br-bg);
+	margin-bottom: 24px;
+}
+
+.widget .widget-title {
+	font-size: 1rem;
+	text-transform: uppercase;
+	font-weight: 900;
+	letter-spacing: 0.02em;
+	border-bottom: var(--br-border) solid var(--br-fg);
+	padding-bottom: 10px;
+	margin-bottom: 14px;
+}
+
+.widget ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.widget li {
+	padding: 6px 0;
+	border-bottom: 2px solid var(--br-fg);
+	font-weight: 700;
+}
+
+.widget li:last-child {
+	border-bottom: 0;
+}
+
+.widget_calendar th,
+.widget_calendar td {
+	border: 2px solid var(--br-fg);
+	text-align: center;
+}
+
+.widget_calendar caption {
+	text-transform: uppercase;
+	font-weight: 900;
+	margin-bottom: 8px;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+
+.site-footer,
+.footer--row-inner {
+	background: var(--br-fg);
+	color: var(--br-bg);
+	border-radius: 0;
+}
+
+.site-footer {
+	border-top: var(--br-border-lg) solid var(--br-fg);
+}
+
+.footer--row .builder-item {
+	border-right: 2px solid var(--br-bg);
+}
+
+.footer--row .builder-item:last-child {
+	border-right: 0;
+}
+
+.site-footer a {
+	color: var(--br-bg);
+	font-weight: 700;
+}
+
+.site-footer a:hover {
+	color: var(--br-yellow);
+}
+
+.site-footer .widget .widget-title {
+	color: var(--br-bg);
+	border-bottom: var(--br-border) solid var(--br-bg);
+}
+
+.site-footer .widget li {
+	border-bottom: 2px solid var(--br-bg);
+}
+
+/* ── Comments ───────────────────────────────────────────────── */
+
+.nv-comments-list article {
+	border: var(--br-border) solid var(--br-fg);
+	box-shadow: var(--br-shadow-sm);
+	padding: 16px;
+	margin-bottom: 20px;
+	background: var(--br-bg);
+}
+
+.nv-comment-header .vcard .author {
+	font-weight: 900;
+	text-transform: uppercase;
+}
+
+/* ── WooCommerce ────────────────────────────────────────────── */
+
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
+	border: var(--br-border) solid var(--br-fg);
+	box-shadow: var(--br-shadow);
+	background: var(--br-bg);
+	border-radius: 0 !important;
+	padding: 0;
+	transition: transform 0.15s linear, box-shadow 0.15s linear;
+}
+
+.woocommerce ul.products li.product:hover,
+.woocommerce-page ul.products li.product:hover {
+	transform: translate(-2px, -2px);
+	box-shadow: var(--br-shadow-xl);
+}
+
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+	font-weight: 900;
+	text-transform: uppercase;
+	letter-spacing: -0.01em;
+	padding: 0 14px;
+}
+
+.woocommerce ul.products li.product .price {
+	font-weight: 700;
+	padding: 0 14px;
+}
+
+.woocommerce ul.products li.product .button {
+	margin: 14px;
+}
+
+.woocommerce span.onsale,
+.woocommerce-page span.onsale {
+	background: var(--br-red);
+	color: #fff;
+	border: var(--br-border) solid var(--br-fg);
+	border-radius: 0 !important;
+	line-height: 3.2;
+	min-height: 3.2em;
+	min-width: 3.2em;
+	font-weight: 900;
+	text-transform: uppercase;
+}
+
+.woocommerce .widget_price_filter .price_slider_amount .button,
+.woocommerce .woocommerce-cart-form .button,
+.woocommerce .cart_totals .checkout-button,
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt,
+.woocommerce #respond input#submit.alt {
+	background: var(--br-red) !important;
+	color: #fff !important;
+	border-color: var(--br-fg) !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active {
+	background: var(--br-yellow);
+}
+
+.woocommerce div.product .product_title {
+	font-weight: 900;
+	text-transform: uppercase;
+}
+
+.woocommerce .quantity .qty {
+	border: var(--br-border) solid var(--br-fg) !important;
+	border-radius: 0 !important;
+}
+
+.woocommerce table.shop_table,
+.woocommerce table.shop_table th,
+.woocommerce table.shop_table td {
+	border: var(--br-border) solid var(--br-fg) !important;
+	border-collapse: collapse;
+}
+
+.woocommerce table.shop_table thead th {
+	background: var(--br-cyan);
+}
+
+/* ── Easy Digital Downloads ─────────────────────────────────── */
+
+.edd_downloads_list .edd_download {
+	border: var(--br-border) solid var(--br-fg);
+	box-shadow: var(--br-shadow);
+	background: var(--br-bg);
+	border-radius: 0 !important;
+	padding: 0;
+}
+
+.edd_download .edd_download_title {
+	font-weight: 900;
+	text-transform: uppercase;
+	padding: 0 14px;
+}
+
+.edd_download .edd_download_buy_button .button {
+	margin: 14px;
+}
+
+/* ── Scroll to top ──────────────────────────────────────────── */
+
+#nv-top-bar,
+.nv-meta-list .posted-on,
+.nv-meta-list .author,
+.nv-meta-list .comments {
+	text-transform: uppercase;
+}
+
+.scroll-to-top {
+	border: var(--br-border) solid var(--br-fg) !important;
+	border-radius: 0 !important;
+	box-shadow: var(--br-shadow-sm);
+}
+
+/* ── Breadcrumbs ────────────────────────────────────────────── */
+
+.neve-breadcrumbs-wrapper {
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+}
+
+/* ── Home: section rhythm (brutalist shadows need clearance) ─── */
+
+.home-roles,
+.br-projects,
+.br-latest,
+.home-cta,
+.home-hero {
+	margin-bottom: 48px;
+}
+
+.home-hero {
+	margin-top: 24px;
+}
+
+/* ── Home: hero composition panel ────────────────────────────── */
+
+.home-hero .hero-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+	align-items: start;
+}
+
+@media (min-width: 782px) {
+	.home-hero .hero-grid {
+		grid-template-columns: 1.2fr 1fr;
+	}
+}
+
+.hero-composition {
+	position: relative;
+	height: 100%;
+	min-height: 340px;
+	border: var(--br-border-lg) solid var(--br-fg);
+	background: var(--br-cyan);
+	box-shadow: var(--br-shadow-xl);
+	overflow: hidden;
+}
+
+.hero-composition img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.hero-composition .shape {
+	position: absolute;
+	border: var(--br-border) solid var(--br-fg);
+}
+
+.hero-composition .shape--red {
+	width: 90px;
+	height: 90px;
+	background: var(--br-red);
+	top: 18px;
+	right: 18px;
+	z-index: 2;
+	transform: rotate(8deg);
+	box-shadow: var(--br-shadow-sm);
+}
+
+.hero-composition .shape--yellow {
+	width: 64px;
+	height: 64px;
+	background: var(--br-yellow);
+	bottom: 24px;
+	left: 24px;
+	z-index: 2;
+	transform: rotate(-12deg);
+	box-shadow: var(--br-shadow-sm);
+}
+
+.hero-composition .shape--ring {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: transparent;
+	border-width: var(--br-border);
+	top: 40px;
+	left: 28px;
+	z-index: 2;
+}
+
+/* CTA buttons need breathing room under their hard shadow. */
+.home-hero .wp-block-buttons,
+.home-cta .wp-block-buttons {
+	margin-bottom: 48px;
+}
+
+/* ── Home: project cards ─────────────────────────────────────── */
+
+.br-projects .wp-block-columns {
+	margin-bottom: 0;
+}
+
+.br-card {
+	background: var(--br-bg);
+	border: var(--br-border) solid var(--br-fg);
+	box-shadow: var(--br-shadow);
+	padding: 20px;
+	height: 100%;
+	transition: transform 0.15s linear, box-shadow 0.15s linear;
+}
+
+.br-card:hover {
+	transform: translate(-2px, -2px);
+	box-shadow: var(--br-shadow-xl);
+}
+
+/* Gutenberg wraps group contents in __inner-container; make it a
+   full-height flex column so cards in a row equalise and their CTA
+   buttons pin to the same bottom edge. */
+.br-card > .wp-block-group__inner-container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.br-card .wp-block-buttons {
+	margin-top: auto;
+}
+
+.br-card .br-card__cat {
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
+	margin-bottom: 12px;
+	color: var(--br-fg);
+}
+
+.br-card h3 {
+	margin-top: 0;
+	margin-bottom: 12px;
+}
+
+/* ── Home: latest posts ──────────────────────────────────────── */
+
+.br-latest .wp-block-latest-posts {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+@media (min-width: 782px) {
+	.br-latest .wp-block-latest-posts {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+.br-latest .wp-block-latest-posts li {
+	border: var(--br-border) solid var(--br-fg);
+	box-shadow: var(--br-shadow-sm);
+	background: var(--br-bg);
+	padding: 16px;
+	transition: transform 0.15s linear, box-shadow 0.15s linear;
+}
+
+.br-latest .wp-block-latest-posts li:hover {
+	transform: translate(-2px, -2px);
+	box-shadow: var(--br-shadow);
+}
+
+.br-latest .wp-block-latest-posts a {
+	font-weight: 900;
+	text-transform: uppercase;
+	letter-spacing: -0.01em;
+	text-decoration: none;
+}
+
+.br-latest .wp-block-latest-posts .wp-block-latest-posts__post-date {
+	display: block;
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	margin-top: 8px;
+	color: var(--br-fg);
+	opacity: 0.65;
+}
+
+/* ── Standart Community attribution note ─────────────────────── */
+
+.standart-note {
+	border: var(--br-border) solid var(--br-fg);
+	background: var(--br-yellow);
+	box-shadow: var(--br-shadow-sm);
+	padding: 12px 20px;
+	margin-top: 24px;
+}
+
+.standart-note p {
+	margin: 0;
+}
+
+.standart-note a {
+	text-decoration: underline;
+	text-decoration-thickness: 3px;
+	text-underline-offset: 3px;
+}
+
+/* ── About: animated timeline ────────────────────────────────── */
+
+.br-timeline {
+	position: relative;
+	margin: 32px 0 48px;
+	padding: 0;
+}
+
+/* The flowing spine. A solid bar + an animated dash layer on top. */
+.br-timeline {
+	--br-timeline-duration: 3s;
+}
+
+/* Speed presets — add the class to .br-timeline to override. */
+.br-timeline.br-timeline--slow {
+	--br-timeline-duration: 6s;
+}
+
+.br-timeline.br-timeline--fast {
+	--br-timeline-duration: 1.5s;
+}
+
+.br-timeline::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 22px;
+	width: var(--br-border-lg);
+	background: var(--br-fg);
+	transform: scaleY(0);
+	transform-origin: top;
+	transition: transform 1.2s linear;
+	z-index: 0;
+}
+
+.br-timeline.is-in-view::before {
+	transform: scaleY(1);
+}
+
+.br-timeline::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 22px;
+	width: var(--br-border-lg);
+	background: repeating-linear-gradient(
+		to bottom,
+		var(--br-red) 0 14px,
+		transparent 14px 28px,
+		var(--br-yellow) 28px 42px,
+		transparent 42px 56px,
+		var(--br-cyan) 56px 70px,
+		transparent 70px 84px
+	);
+	background-size: 100% 84px;
+	opacity: 0;
+	transition: opacity 0.4s linear;
+	z-index: 0;
+}
+
+.br-timeline.is-in-view::after {
+	opacity: 0.9;
+	animation: br-timeline-flow var(--br-timeline-duration) linear infinite;
+}
+
+@keyframes br-timeline-flow {
+	0% {
+		background-position-y: 0;
+	}
+	100% {
+		background-position-y: 84px;
+	}
+}
+
+.br-timeline__item {
+	position: relative;
+	padding-left: 72px;
+	margin-bottom: 40px;
+	z-index: 1;
+}
+
+/* Node on the spine. */
+.br-timeline__item::before {
+	content: '';
+	position: absolute;
+	left: 11px;
+	top: 8px;
+	width: 22px;
+	height: 22px;
+	background: var(--br-yellow);
+	border: var(--br-border) solid var(--br-fg);
+	box-shadow: 3px 3px 0 0 var(--br-fg);
+	transform: rotate(45deg) scale(0);
+	transition: transform 0.35s linear;
+	z-index: 2;
+}
+
+.br-timeline__item.is-in-view::before {
+	transform: rotate(45deg) scale(1);
+}
+
+/* Staggered pop-in of the cards. */
+.br-timeline__card {
+	opacity: 0;
+	transform: translateY(24px);
+	transition: opacity 0.5s linear, transform 0.5s linear;
+	position: relative;
+	z-index: 1;
+}
+
+.br-timeline__item.is-in-view .br-timeline__card {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Gutenberg wraps group contents in __inner-container; keep the
+   inner-container transparent and the card filling it. */
+.br-timeline__item > .wp-block-group__inner-container,
+.br-timeline__card > .wp-block-group__inner-container {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.br-timeline__card > .wp-block-group__inner-container > :last-child {
+	margin-bottom: 0;
+}
+
+.br-timeline__date {
+	display: inline-block;
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	background: var(--br-fg);
+	color: var(--br-bg);
+	padding: 4px 10px;
+	margin-bottom: 10px;
+}
+
+.br-timeline__card h3 {
+	margin: 0 0 8px;
+}
+
+.br-timeline__card p {
+	margin: 0;
+}
+
+@media (min-width: 782px) {
+	/* Centered spine, cards alternate left/right. */
+	.br-timeline {
+		padding-left: 0;
+	}
+
+	.br-timeline::before,
+	.br-timeline::after {
+		left: 50%;
+		transform-origin: top;
+		margin-left: calc(var(--br-border-lg) / -2);
+	}
+
+	.br-timeline::before {
+		transform: scaleY(0);
+	}
+
+	.br-timeline.is-in-view::before {
+		transform: scaleY(1);
+	}
+
+	.br-timeline__item {
+		width: 50%;
+		left: 0;
+		padding-left: 0;
+		padding-right: 48px;
+	}
+
+	.br-timeline__item::before {
+		left: auto;
+		right: -11px;
+	}
+
+	/* Even items go to the right side of the spine. */
+	.br-timeline__item:nth-child(even) {
+		left: 50%;
+		padding-left: 48px;
+		padding-right: 0;
+	}
+
+	.br-timeline__item:nth-child(even)::before {
+		right: auto;
+		left: -11px;
+	}
+
+	/* Odd cards sit to the left of the spine, right-aligned toward it. */
+	.br-timeline__item:nth-child(odd) {
+		text-align: right;
+	}
+
+	/* Slides in from its own side. */
+	.br-timeline__item:nth-child(odd) .br-timeline__card {
+		transform: translateX(-28px);
+	}
+
+	.br-timeline__item:nth-child(even) .br-timeline__card {
+		transform: translateX(28px);
+	}
+
+	.br-timeline__item.is-in-view:nth-child(odd) .br-timeline__card,
+	.br-timeline__item.is-in-view:nth-child(even) .br-timeline__card {
+		transform: translateX(0);
+	}
+}
+
+/* Respect reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+	.br-timeline::before,
+	.br-timeline::after,
+	.br-timeline__item::before,
+	.br-timeline__card {
+		transition: none;
+		animation: none;
+	}
+
+	.br-timeline::before,
+	.br-timeline__card {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* ── Block editor: reveal the timeline while editing ──────────
+   brutheme.js only adds .is-in-view on the front-end, so inside
+   the editor the cards/spine would stay at opacity:0. Force the
+   revealed state inside .editor-styles-wrapper so items are
+   visible and editable. */
+
+.editor-styles-wrapper .br-timeline::before,
+.editor-styles-wrapper .br-timeline::after {
+	opacity: 1;
+	transform: scaleY(1);
+	animation: none;
+}
+
+.editor-styles-wrapper .br-timeline__item::before {
+	transform: rotate(45deg) scale(1);
+}
+
+.editor-styles-wrapper .br-timeline__item .br-timeline__card,
+.editor-styles-wrapper .br-timeline__item:nth-child(odd) .br-timeline__card,
+.editor-styles-wrapper .br-timeline__item:nth-child(even) .br-timeline__card {
+	opacity: 1;
+	transform: none;
+}
+
+/* ── Responsive: reduce shadow bleed on small screens ───────── */
+
+@media (max-width: 768px) {
+	:root {
+		--br-shadow: 4px 4px 0 0 var(--br-fg);
+		--br-shadow-lg: 6px 6px 0 0 var(--br-fg);
+		--br-shadow-xl: 8px 8px 0 0 var(--br-fg);
+	}
+
+	.hfg_header.site-header {
+		border-bottom-width: var(--br-border);
+	}
+
+	.nv-page-title {
+		font-size: 2rem;
+	}
+}
+
+/* ── Print ──────────────────────────────────────────────────── */
+
+@media print {
+	.nav-ul,
+	.navbar-toggle,
+	.site-footer,
+	.scroll-to-top,
+	.comment-form {
+		display: none !important;
+	}
+}

@@ -1,21 +1,19 @@
 /*
-Theme Name: Neobrutheme
-Theme URI: https://github.com/vixwillems/neobrutheme
-Author: Vix Willems
-Author URI: https://vix.coffee
-Description: A neo-brutalist WordPress theme. Thick borders, solid zero-blur shadows, high-saturation colors, mechanical push-down interactions. Anti-corporate, maximalist, raw.
-Version: 1.0.0
-Requires at least: 6.0
-Tested up to: 6.5
-Requires PHP: 8.0
-License: GNU General Public License v2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: neobrutheme
-Tags: one-column, two-columns, right-sidebar, custom-background, custom-logo, editor-style, featured-images, footer-widgets, full-width-template, theme-options, translation-ready
+Theme Name:     Neobrutheme
+Theme URI:      https://vix.coffee
+Author:         Vix Willems
+Author URI:     https://vix.coffee
+Tested up to:   6.5
+Requires PHP:   7.0
+Requires at least: 5.5
+Description:    A neo-brutalist WordPress theme built on the Neve framework. All of Neve's functionality (header/footer builder, Customizer options, blog layouts, WooCommerce, EDD) with the raw, mechanical, high-contrast look of the neo-brutalist design system: thick black borders, solid zero-blur shadows, high-saturation colors, Space Grotesk typography, and push-down mechanical buttons. Anti-corporate, maximalist, loud.
+Version:        4.2.10
+License:        GNU General Public License v2 or later
+License URI:    http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:    neve
+Pro Slug:  			neve-pro-addon
+AMP: 						true
+WordPress Available:  yes
+Requires License:     no
+Tags: blog, custom-logo, e-commerce, rtl-language-support, grid-layout, one-column, two-columns, custom-background, custom-colors, custom-header, custom-menu, featured-image-header, featured-images, flexible-header, full-width-template, sticky-post, theme-options, threaded-comments, translation-ready, accessibility-ready, wide-blocks, block-styles, footer-widgets, portfolio, left-sidebar, right-sidebar
 */
-
-/* Compiled Tailwind utilities */
-@import url('assets/css/tailwind.css');
-
-/* Neo-brutalist design system */
-@import url('assets/css/style.css');

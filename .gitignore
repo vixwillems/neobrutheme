@@ -11,8 +11,7 @@
 /wp-content/plugins/index.php
 /wp-content/themes/index.php
 /wp-includes/
-/index.php
-/license.txt
+# Theme root index.php and LICENSE.txt are required — do NOT ignore them.
 /readme.html
 /wp-*.php
 /xmlrpc.php
@@ -52,4 +51,16 @@ assets/css/app.js
 #
 # Note: If you wish to whitelist themes,
 # uncomment the next line
-#/wp-content/themes.DS_Store
+#/wp-content/themes/
+
+# Local artifacts (never commit)
+.DS_Store
+**/.DS_Store
+.playwright-mcp/
+*.bak
+
+# Local-only references: pro plugin lives in wp-content/plugins on the server,
+# and these are scratch docs/screenshots, not theme runtime files.
+neve-pro-addon/
+brutheme.rtfd/
+timeline-fixed.png

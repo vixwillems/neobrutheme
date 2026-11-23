@@ -1,15 +1,16 @@
 <?php
 /**
- * The sidebar template.
+ * The Sidebar containing the main widget areas.
  *
- * @package Neobrutheme
+ * @package  Neve
  */
 
-if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-  return;
-}
-?>
+if ( ! is_active_sidebar( 'blog-sidebar' ) ) {
+	return;
+} ?>
 
-<aside class="sidebar" role="complementary" aria-label="<?php esc_attr_e( 'Sidebar', 'neobrutheme' ); ?>">
-  <?php dynamic_sidebar( 'sidebar-1' ); ?>
-</aside>
+<div class="nv-blog-sidebar">
+	<aside id="secondary" class="blog-sidebar" role="complementary">
+		<?php dynamic_sidebar( 'blog-sidebar' ); ?>
+	</aside>
+</div>

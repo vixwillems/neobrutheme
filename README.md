@@ -1,173 +1,94 @@
 # Neobrutheme
 
-A neo-brutalist WordPress theme. Thick borders, solid zero-blur shadows, high-saturation colors, mechanical push-down interactions. Anti-corporate, maximalist, raw.
+A neo-brutalist WordPress theme built on the **Neve** framework. Thick borders, solid zero-blur shadows, high-saturation colors, mechanical push-down interactions. Anti-corporate, maximalist, raw.
 
-Visual style adapted from [vix.coffee](https://vix.coffee). Content is original.
+Visual style adapted from [vix.coffee](https://vix.coffee). Framework: [Neve](https://themeisle.com/themes/neve/) (GPL).
+
+This theme keeps **100% of Neve's functionality** — Customizer options, the drag-and-drop Header/Footer Grid (HFG) builder, blog layout options, WooCommerce, Easy Digital Downloads, block patterns, mega menu, starter content, and the admin dashboard — and overlays the brutheme neo-brutalist design system on top.
 
 ## Requirements
 
-- WordPress 6.0+
-- PHP 8.0+
+- WordPress 5.5+
+- PHP 7.0+
 
 ## Installation
 
 1. Upload the `neobrutheme` folder to `wp-content/themes/`
 2. Activate the theme in **Appearance > Themes**
-3. Go to **Settings > Permalinks** and click **Save** (flushes rewrite rules for custom post types)
-4. ACF Free is bundled as a must-use plugin — no additional plugin install needed
 
-## Development
+No build step is required — all compiled assets are committed. Neve ships with its own composer/yarn toolchain if you want to rebuild its JS/CSS from source; the brutheme skin is plain CSS with no compilation.
 
-```bash
-npm install          # install Tailwind v4 + Vite
-npm run dev          # watch mode with HMR
-npm run build        # compile production CSS
+## What changed vs. stock Neve
+
+Everything is additive. Neve's codebase is untouched apart from **default values** (so a fresh install looks brutalist out of the box, while every Customizer control still works):
+
+| File | Change |
+|---|---|
+| `globals/utilities.php` | Default color palette → brutalist (red `#FF5C5C`, yellow `#FFDE59`, cyan `#5CE1E6`, black/white) |
+| `globals/migrations.php` | Button defaults → `4px` black border, `0` radius, hard offset shadow |
+| `inc/core/settings/mods.php` | Body/heading fonts → Space Grotesk; heading weight `900`, uppercase, tight tracking; larger display sizes |
+| `inc/customizer/defaults/layout.php` | Blog card border radius → `0`, card style on |
+| `brutheme.php` | Enqueues the skin, self-hosts Space Grotesk, removes it from the Google Fonts CDN |
+| `assets/css/brutheme.css` | The neo-brutalist design system (loaded after all Neve styles) |
+| `style.css` | Theme metadata (Theme Name: Neobrutheme) |
+
+### The skin layer
+
+`brutheme.php` does three things:
+
+1. **Enqueues `assets/css/brutheme.css`** after Neve's main CSS, WooCommerce and EDD styles.
+2. **Self-hosts Space Grotesk** — the `.woff2` files in `assets/fonts/` are referenced via `@font-face`. Space Grotesk is removed from the Google Fonts CDN list so it is never fetched from `fonts.googleapis.com`, and it's offered under "System fonts" in the Customizer instead.
+3. **Adds the skin to the block editor** so editing matches the front-end look.
+
+The default global colors are the brutalist palette, but users can change any color in **Appearance > Customize > Colors** and the whole theme re-tints (the skin references the `--nv-*` CSS custom properties).
+
+## Key architecture
+
 ```
-
-Compiled `assets/css/tailwind.css` is committed and served from the theme (not fetched from CDN).
-
-### Build pipeline
-
-The theme uses Vite + `@tailwindcss/vite` to compile Tailwind utilities. The entry point is `assets/js/app.js` which imports `assets/css/app.css`. The `@source` directives in `app.css` scan template files for class usage.
-
-Output: `assets/css/tailwind.css` (committed to repo).
-
-Design system styles live in `assets/css/style.css` (hand-written, not compiled).
-
-## Theme structure
-
-```
-style.css                    # WordPress metadata + CSS imports
-functions.php                # Bootstrap: requires inc/ files, enqueues assets
-theme.json                   # Site Editor settings: colors, typography, spacing, layout
-header.php                   # Sticky nav, geometric logo, mobile menu
-footer.php                   # Black footer, logo, social links
-index.php                    # Main loop fallback
-page.php                     # ACF Flexible Content layouts
-single.php                   # Single post
-archive.php                  # Archive pages
-single-portfolio.php         # Portfolio item detail
-single-team.php              # Team member detail
-single-service.php           # Service detail
-archive-portfolio.php        # Portfolio grid
-archive-team.php             # Team grid
-archive-service.php          # Services grid
-search.php                   # Search results
-404.php                      # 404 page
-sidebar.php                  # Widget area
-
-template-parts/              # Reusable card components
-  content-post.php           # Blog post card
-  content-portfolio.php      # Portfolio card
-  content-team.php           # Team member card
-  content-service.php        # Service card
-  content-none.php           # No results state
-
-flexible-layouts/            # ACF Flexible Content templates
-  layout-hero.php            # Hero + composition panel
-  layout-marquee.php         # Scrolling text ticker
-  layout-stat-cards.php      # Stat shapes with counters
-  layout-content-grid.php    # Dynamic post/CPT grid
-  layout-team-grid.php       # Team member cards
-  layout-services.php        # Services listing
-  layout-text-image.php      # Two-column text + image
-  layout-testimonials.php    # Testimonial cards
-  layout-cta.php             # Call-to-action banner
-
+style.css                    # WordPress metadata (Theme Name: Neobrutheme)
+functions.php                # Neve bootstrap + loads brutheme.php
+brutheme.php                 # Brutheme skin: enqueue, fonts, editor style
 assets/
   css/
-    app.css                  # Tailwind v4 entry (source directives)
-    tailwind.css             # Compiled output (committed)
-    style.css                # Neo-brutalist design system
-  js/
-    interactions.js          # Vanilla JS: counters, fade-in, stagger, tabs
+    brutheme.css             # Neo-brutalist design system (THE skin)
+    style-main-new.css       # Neve core CSS (committed, prebuilt)
+    woocommerce.css          # Neve WooCommerce CSS
+    easy-digital-downloads.css
+    mega-menu.css
+  apps/                      # Neve Customizer controls, dashboard (prebuilt React)
+  js/build/modern/frontend.js# Neve front-end JS (prebuilt)
   fonts/
     space-grotesk-400.woff2  # Self-hosted Space Grotesk
     space-grotesk-500.woff2
     space-grotesk-700.woff2
 
-inc/
-  theme-setup.php            # Theme supports, menus, image sizes
-  acf-setup.php              # ACF JSON sync, options pages, field groups
-  post-types.php             # CPT registrations (portfolio, team, service)
-  color-settings.php         # CSS custom properties from ACF options
-  template-tags.php          # Helper functions
-
-acf-json/                    # ACF field group JSON (auto-synced)
-tools/
-  import-demo.php            # Sample homepage + content importer
-mu-plugins/
-  acf-mu-loader.php          # Loads bundled ACF
-  acf/                       # ACF Free (bundled)
+header-footer-grid/          # HFG builder (drag-and-drop header/footer)
+inc/                         # Neve core (customizer options, styles, views)
+globals/                     # Neve global helpers + defaults (edited)
+views/                       # Neve template-part views
+template-parts/              # Neve content templates
+woocommerce/                 # Neve WooCommerce templates
 ```
 
-## Custom post types
+## Functionality (all from Neve)
 
-| CPT | Slug | Archive | Description |
-|---|---|---|---|
-| Portfolio | `/portfolio` | Yes | Project showcases |
-| Team | `/team` | Yes | Team member profiles |
-| Service | `/services` | Yes | Service offerings |
-
-After activation: **Settings > Permalinks > Save** to register rewrite rules.
-
-### Sample homepage import
-
-Load a demo homepage with all 9 layouts, sample content, and default colors:
-
-```bash
-wp eval-file tools/import-demo.php
-```
-
-This creates a Home page, sets it as the front page, populates all Flexible Content layouts, creates sample Portfolio/Team/Service items, and applies the default color palette. It will not overwrite existing content.
-
-## Site Editor (appearance-tools)
-
-The theme registers `theme.json` (v3) with:
-
-- **Color palette** — matches the ACF color options (Background, Foreground, Accent Red, Secondary Yellow, Accent Cyan, White). Edit these in the Site Editor or via ACF > Colors — both update the same CSS custom properties.
-- **Typography** — Space Grotesk registered as the theme font family with all 3 weights (400, 500, 700) self-hosted. Font sizes from Small to Giant.
-- **Layout** — content: 720px, wide: 1200px.
-- **Spacing** — 9-step scale from X-Small (0.25rem) to XXX-Large (6rem).
-- **Button defaults** — 4px solid black border, Space Grotesk 700, uppercase, hover → red background.
-- **Heading defaults** — 900 weight, uppercase, tight tracking.
-
-The Site Editor's global styles panel, template editing, and block patterns all work out of the box.
-
-## ACF options pages
-
-Navigate to **Neobrutheme** in the admin sidebar:
-
-- **General** — Site tagline, social links, footer text, analytics ID
-- **Colors** — All 6 color tokens (customizable, output as CSS custom properties)
-- **Homepage** — Flexible Content for composable page layouts
-
-### Homepage Flexible Content layouts
-
-Drag and drop these layout blocks to compose the homepage:
-
-| Layout | Description |
-|---|---|
-| Hero | Display-stroke heading + CSS geometric composition panel |
-| Marquee | Scrolling text ticker (configurable speed/color) |
-| Stat Cards | Yellow panel with animated stat shapes |
-| Content Grid | Dynamic grid from any post type |
-| Team Grid | Team member cards |
-| Services | Service cards (grid or list) |
-| Text + Image | Two-column with grayscale hover |
-| Testimonials | Quote cards with rotation |
-| CTA | Full-width colored banner with button |
+- **Customizer** — colors, typography, layout, buttons, forms, blog, single post, shop
+- **Header/Footer Grid builder** — drag-and-drop logo, nav, search, social, buttons, widgets
+- **Blog layouts** — grid, list, alternative, covers; card style; meta ordering
+- **WooCommerce + Easy Digital Downloads** — full template overrides
+- **Block patterns & starter content** — Neve's built-in patterns and demo import
+- **Mega menu**, **off-canvas cart**, **scroll to top**, **PWA**, AMP
 
 ## Design system
 
-Neo-brutalist aesthetic. Core rules:
+Neo-brutalist aesthetic. Core rules (enforced in `assets/css/brutheme.css`):
 
 - **Shadows**: Solid, zero-blur, bottom-right offset (`8px 8px 0 0 #000`)
-- **Borders**: `border-4` / `border-8` on all structural elements, always black
-- **Radius**: `rounded-none` only (no mid-range radii). `rounded-full` for circles
-- **Typography**: Space Grotesk at weight 700+ baseline, uppercase headlines
-- **Colors**: Customizable via ACF (CSS custom properties on `:root`)
-- **Interactions**: Mechanical push-down buttons, grayscale-to-color images
+- **Borders**: `4px`/`8px` black on all structural elements, always `var(--nv-text-color)`
+- **Radius**: `0` everywhere (circles use `50%` for avatars/stickers)
+- **Typography**: Space Grotesk, headings `900` uppercase with `-0.02em` tracking
+- **Colors**: Driven by Neve's global colors (defaults shown above), fully customizable
+- **Interactions**: Mechanical push-down buttons (`:active` swallows the shadow), card hover lift, grayscale-to-color images
 
 ### Anti-patterns (never do)
 
@@ -175,32 +96,42 @@ Neo-brutalist aesthetic. Core rules:
 - No mid-range border radii (`rounded-md`, `rounded-lg`)
 - No desaturated grays (`#333`, `#666`, slate)
 - No `ease-in-out` curves
-- No Google Fonts CDN
+- No Google Fonts CDN (Space Grotesk is self-hosted)
 - No jQuery
 
 ## Customization
 
 ### Colors
 
-Go to **Neobrutheme > Colors** in the admin. All 6 colors are customizable:
+**Appearance > Customize > Colors** — same palette Neve uses (currently labeled Base/Dark Mode). The brutalist defaults are:
 
-| Property | Default | Usage |
+| Token | Default | Usage |
 |---|---|---|
-| `--color-bg` | `#FFFFFF` | Page canvas |
-| `--color-fg` | `#000000` | Text, borders, shadows |
-| `--color-red` | `#FF5C5C` | Primary accent |
-| `--color-yellow` | `#FFDE59` | Highlights, focus states |
-| `--color-cyan` | `#5CE1E6` | Card headers, depth |
-| `--color-white` | `#FFFFFF` | Card interiors |
+| `nv-primary-accent` | `#FF5C5C` | Primary accent (red) |
+| `nv-secondary-accent` | `#FFDE59` | Highlights, focus states (yellow) |
+| `nv-site-bg` | `#FFFFFF` | Page canvas |
+| `nv-light-bg` | `#FFFFFF` | Light surfaces |
+| `nv-dark-bg` | `#000000` | Dark surfaces |
+| `nv-text-color` | `#000000` | Text, borders, shadows |
+| `nv-text-dark-bg` | `#FFFFFF` | Text on dark |
+| `nv-c-1` | `#5CE1E6` | Cyan accent |
 
-In templates, use `bg-[var(--color-red)]` or `text-[var(--color-fg)]` — never hardcoded hex.
+### Fonts
+
+Space Grotesk (400/500/700) is self-hosted and is the default body + heading font. In **Customize > Typography** you can pick any other system/Google font — Space Grotesk stays available under System.
+
+### Header / Footer
+
+**Customize > Header / Footer** — full HFG builder. Rows render with the brutalist border treatment automatically.
 
 ### Menus
 
-Register menus in **Appearance > Menus**:
-- **Primary Navigation** — top nav bar
-- **Footer Navigation** — footer links
+Register menus in **Appearance > Menus** (the HFG "Navigation" component picks them up):
+- **Primary Menu** — top nav
+- **Footer Menu** — footer links
 
 ## License
 
 GPL v2 or later — https://www.gnu.org/licenses/gpl-2.0.html
+
+Neve, Copyright 2018 ThemeIsle — https://themeisle.com/themes/neve/

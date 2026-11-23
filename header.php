@@ -1,79 +1,132 @@
-<!DOCTYPE html>
+<?php
+/**
+ * The template for displaying the header
+ *
+ * Displays all of the head element and everything up until the page header div.
+ *
+ * @package Neve
+ * @since   1.0.0
+ */
+?><!DOCTYPE html>
+<?php
+
+/**
+ * Filters the header classes.
+ *
+ * @param string $header_classes Header classes.
+ *
+ * @since 2.3.7
+ */
+$header_classes = apply_filters( 'nv_header_classes', 'header' );
+
+/**
+ * Fires before the page is rendered.
+ */
+do_action( 'neve_html_start_before' );
+
+?>
 <html <?php language_attributes(); ?>>
+
 <head>
-  <meta charset="<?php bloginfo( 'charset' ); ?>">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="profile" href="https://gmpg.org/xfn/11">
-  <?php wp_head(); ?>
+	<?php
+	/**
+	 * Executes actions after the head tag is opened.
+	 *
+	 * @since 2.11
+	 */
+	do_action( 'neve_head_start_after' );
+	?>
+
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
+		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+	<?php endif; ?>
+	<?php wp_head(); ?>
+
+	<?php
+	/**
+	 * Executes actions before the head tag is closed.
+	 *
+	 * @since 2.11
+	 */
+	do_action( 'neve_head_end_before' );
+	?>
 </head>
 
-<body <?php body_class( get_theme_mod( 'neobrutheme_body_pattern', true ) ? '' : 'no-pattern' ); ?>>
+<body  <?php body_class(); ?> <?php neve_body_attrs(); ?> >
+<?php
+/**
+ * Executes actions after the body tag is opened.
+ *
+ * @since 2.11
+ */
+do_action( 'neve_body_start_after' );
+?>
 <?php wp_body_open(); ?>
+<div class="wrapper">
+	<?php
+	/**
+	 * Executes actions before the header tag is opened.
+	 *
+	 * @since 2.7.2
+	 */
+	do_action( 'neve_before_header_wrapper_hook' );
+	?>
 
-<nav class="site-nav <?php echo get_theme_mod( 'neobrutheme_header_sticky', true ) ? 'sticky top-0 z-50' : ''; ?> bg-[var(--header-bg-resolved,var(--color-bg))] border-b-[var(--header-border-width,8px)] border-[var(--color-fg)]">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+	<header class="<?php echo esc_attr( $header_classes ); ?>" <?php echo ( neve_is_amp() ) ? 'next-page-hide' : ''; ?> >
+		<a class="neve-skip-link show-on-focus" href="#content" >
+			<?php echo __( 'Skip to content', 'neve' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		</a>
+		<?php
 
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="flex items-center gap-3 no-underline">
-      <div class="flex items-center">
-        <span class="w-5 h-5 rounded-full bg-[var(--color-red)] border-2 border-black"></span>
-        <span class="w-5 h-5 bg-[var(--color-yellow)] -ml-1.5 border-2 border-black"></span>
-        <span class="w-0 h-0 geo-triangle bg-[var(--color-cyan)] -ml-1.5" style="width:20px;height:20px;border-left:2px solid #000;border-right:2px solid #000;border-bottom:2px solid #000"></span>
-      </div>
-      <span class="font-black uppercase text-xl tracking-tighter text-black"><?php bloginfo( 'name' ); ?></span>
-    </a>
+		/**
+		 * Executes actions before the header ( navigation ) area.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'neve_before_header_hook' );
 
-    <button id="menu-toggle" class="md:hidden flex items-center justify-center w-12 h-12 border-4 border-black bg-white text-2xl" aria-label="Toggle menu">
-      <span id="menu-icon">&#9776;</span>
-    </button>
+		if ( apply_filters( 'neve_filter_toggle_content_parts', true, 'header' ) === true ) {
+			do_action( 'neve_do_header' );
+		}
 
-    <ul id="desktop-nav" class="hidden md:flex items-center gap-2 list-none p-0 m-0">
-      <?php
-      wp_nav_menu( array(
-        'theme_location' => 'primary',
-        'container'      => false,
-        'items_wrap'     => '%3$s',
-        'link_before'    => '<span class="block px-4 py-2 text-sm font-bold uppercase tracking-wider border-4 border-transparent hover:bg-[var(--color-cyan)] hover:border-black">',
-        'link_after'     => '</span>',
-        'depth'          => 1,
-      ) );
-      ?>
-    </ul>
-  </div>
+		/**
+		 * Executes actions after the header ( navigation ) area.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'neve_after_header_hook' );
+		?>
+	</header>
 
-  <ul id="mobile-menu" class="md:hidden hidden list-none p-0 m-0 border-t-8 border-black bg-white">
-    <div class="px-4 py-4 flex flex-col gap-2">
-      <?php
-      wp_nav_menu( array(
-        'theme_location' => 'primary',
-        'container'      => false,
-        'items_wrap'     => '%3$s',
-        'link_before'    => '<span class="block px-4 py-3 text-sm font-bold uppercase tracking-wider border-4 border-black hover:bg-[var(--color-cyan)]">',
-        'link_after'     => '</span>',
-        'depth'          => 1,
-      ) );
-      ?>
-    </div>
-  </ul>
-</nav>
+	<?php
+	/**
+	 * Executes actions after the header tag is closed.
+	 *
+	 * @since 2.7.2
+	 */
+	do_action( 'neve_after_header_wrapper_hook' );
+	?>
 
-<script>
-(function() {
-  var toggle = document.getElementById('menu-toggle');
-  var menu = document.getElementById('mobile-menu');
-  var icon = document.getElementById('menu-icon');
-  if (toggle && menu) {
-    toggle.addEventListener('click', function() {
-      var isOpen = !menu.classList.contains('hidden');
-      if (isOpen) {
-        menu.classList.add('hidden');
-        icon.textContent = '\u2630';
-      } else {
-        menu.classList.remove('hidden');
-        icon.textContent = '\u2715';
-      }
-    });
-  }
-})();
-</script>
 
-<main id="primary" class="site-main">
+	<?php
+	/**
+	 * Executes actions before main tag is opened.
+	 *
+	 * @since 1.0.4
+	 */
+	do_action( 'neve_before_primary' );
+	?>
+
+	<main id="content" class="neve-main">
+
+<?php
+/**
+ * Executes actions after main tag is opened.
+ *
+ * @since 1.0.4
+ */
+do_action( 'neve_after_primary_start' );
+
